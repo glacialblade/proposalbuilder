@@ -1,0 +1,14 @@
+<br/><br/>
+<div class="normalbox divcenter">
+	<div class="boxheader">Login Form</div>
+	<div class="boxcontent">
+		<span class="error" data-ng-if="error">{{ error }}<br/><br/></span>
+		<strong>Email: <span class="error">*</span></strong><br/>
+		<input type="text" data-ng-model="user.email" class="long">
+		<br/><br/>
+		<strong>Password: <span class="error">*</span></strong><br/>
+		<input type="password" data-ng-model="user.password" class="long">
+		<br/><br/>
+		<input type="button" value="Login" data-ng-click="login()">
+	</div>
+</div>

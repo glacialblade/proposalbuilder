@@ -1,0 +1,137 @@
+proposalbuilder.controller("EditController",['$scope','$window','$routeParams','RedirectService','ProposalsFactory','ImagesFactory',
+function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFactory){
+	$scope.$on("$routeChangeSuccess",function(){
+		$(".export_modal").modal({width:300});
+		$scope.export_as = "PDF";
+		
+		$scope.pages = ["Cover Page","Company Details","Company Overview","Confirmation of Requirements","Scope of Works","Cost Estimate","Conclusion","Preview","Upload Images"];
+		$scope.page = 1;
+
+		$scope.proposal_id = $routeParams.id;
+		$scope.fetch_proposal();
+	});
+
+	$scope.fetch_proposal = function(){
+		var promise = ProposalsFactory.fetch_proposal({proposal_id:$scope.proposal_id});
+		promise.then(function(data){
+			$scope.proposal = data.data;
+			$scope.fetch_images();
+		}).then(null,function(data){
+			$window.history.back();
+		})
+	}
+
+	$scope.change_page = function(page){
+		$scope.message = false;
+		$scope.image_message = false;
+		$scope.page = page;
+	}
+
+	$scope.edit_proposal = function(){
+		var promise = ProposalsFactory.edit_proposal($scope.proposal);
+		promise.then(function(data){
+			$scope.message = true;
+		}).then(null,function(){ })
+	}
+
+	$scope.upload_callback = function(message){
+		$scope.image_message = "";
+		if(message == 1){
+			$scope.fetch_images();
+		}
+		else{
+			$scope.image_message = message;
+		}
+		$scope.$apply();
+	}
+
+	$scope.fetch_images = function(){
+		var promise = ImagesFactory.fetch_images({proposal_id:$scope.proposal_id});
+		promise.then(function(data){
+			$scope.images = data.data;
+
+			$scope.forupload = [];
+			for(var i in $scope.images){
+				$scope.forupload.push({
+					title:$scope.images[i].name,
+					value:$scope.images[i].image
+				});
+			}
+		}).then(null,function(data){
+			$scope.images = null;
+		}).then(function(){
+			$scope.fix_tinymce();
+		})
+	}
+
+	$scope.delete_image = function(image){
+		var promise = ImagesFactory.delete_image(image);
+		promise.then(function(data){
+			$scope.fetch_images();
+		}).then(null,function(data){
+
+		})
+	}
+
+	$scope.fix_tinymce = function(){
+		var tinymce_ids = ["#company_overview","#confirmation_of_requirements","#scope_of_works","#cost_estimate","#conclusion"]
+		// REMOVE EDITORS
+		for(var i in tinymce_ids){
+			tinymce.EditorManager.execCommand('mceRemoveEditor',true,tinymce_ids[i].replace("#",""));
+		}
+
+		// INITIALIZE EDITORS
+		tinymce.init({
+			setup : function(ed) {
+		    	ed.on('GetContent', function(e) {
+		    		var key = e.target.id;
+				    $scope.proposal[key] = e.content;
+				});
+		   	},
+			selector: tinymce_ids.join(","),
+			theme: "modern",
+			width: "100%",
+			height: 300,
+			plugins: [
+				"advlist link image lists hr pagebreak",
+				"searchreplace wordcount insertdatetime nonbreaking",
+				"table contextmenu directionality paste textcolor"
+			],
+			image_list: $scope.forupload,
+			content_css: "css/editor-style.css",
+			toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor"
+		});
+
+		// FIX VALUES OF EDITORS
+		for(var i in tinymce_ids){
+			$(tinymce_ids[i]).val($scope.proposal[tinymce_ids[i].replace("#","")]);
+		}
+	}
+
+	$scope.open_modal = function(){ $(".export_modal").fadeIn(); }
+	$scope.close_modal = function(){ $(".export_modal").fadeOut(); }
+
+	$scope.export_proposal = function(){
+		if($scope.export_as == "PDF"){
+			$window.location.href = "app/proposals/get/export_proposal_pdf.php?proposal_id="+$scope.proposal.id;
+		}
+		else if($scope.export_as == "Word"){
+			$window.location.href = "app/proposals/get/export_proposal_word.php?proposal_id="+$scope.proposal.id;
+		}
+	}
+}]);
+
+proposalbuilder.directive("iframeloader",function(){
+	return {
+		restrict:"A",
+		scope:{
+			loaded:"&"
+		},
+		controller:function($scope,$element){
+			angular.element($element).bind("load",function(e){
+				var value = $(this).contents().find("body").html();
+				$scope.loaded({message:value});
+			})
+		}
+	}
+})

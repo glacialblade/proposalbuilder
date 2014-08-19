@@ -1,0 +1,246 @@
+<div id="wrapper">
+	<div class="left-sidebar">
+		<ul class="proposal-pages">
+			<li class="title"><span class="proposal-type"></span> {{ proposal.title }}</li>
+			<li data-ng-repeat="p in pages" 
+			    data-ng-click="change_page($index+1)"
+			    data-ng-class="{ 'active':($index+1) == page }">
+				{{ p }}
+			</li>
+			<li>
+				<a href="#/proposal_type/{{ proposal.proposal_type_id }}">Back to List</a>
+			</li>
+		</ul>
+	</div>
+	<div class="mainbody">
+		<!-- COVER PAGE !-->
+		<div class="pages" data-ng-show="page == 1">
+			<div class="title">Cover Page</div>
+			<div class="content">
+				<form name="coverpage">
+					<table>
+						<colgroup width="230"/>
+						<colgroup width="230"/>
+						<tr>
+							<td>
+								<label for="client-name">Title</label><br/>
+								<input type="text" data-ng-model="proposal.title" size="23" maxlength="50">
+							</td>
+							<td>
+								<label for="client-name">Client Name</label><br/>
+								<input type="text" data-ng-model="proposal.client_name" size="23" maxlength="50">
+							</td>
+							<td>
+								<label for="date">Submission</label><br/>
+								<input type="text" data-ng-model="proposal.submission_date" size="23" datepicker="submission_date" readonly=true>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- COMPANY DETAILS !-->
+		<div class="pages" data-ng-show="page == 2">
+			<div class="title">Company Details</div>
+			<div class="content">
+				<form name="companydetails">
+					<table class="company_detail_tbl">
+						<tr>
+							<td colspan=3>
+								<div class="codetail-label">Legal Name of Company</div>
+								<input type="text" data-ng-model="proposal.legal_name" size="100">
+							</td>
+						</tr>
+						<tr data-ng-if="proposal.proposal_type_id == 2">
+							<td colspan=3>
+								<div class="codetail-label">Trading Name</div>
+								<input type="text" data-ng-model="proposal.trading_name" size="100">
+							</td>
+						</tr>
+						<tr>
+							<td colspan=3>
+								<div class="codetail-label">Head Office</div>
+								<input type="text" data-ng-model="proposal.head_office" size="100">
+							</td>
+						</tr>
+						<tr>
+							<td colspan=3>
+								<div class="codetail-label">Postal Address</div>
+								<input type="text" data-ng-model="proposal.postal_address" size="100">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="codetail-label">Telephone No.</div>
+								<input type="text" data-ng-model="proposal.telephone_no" size="24" >
+							</td>
+							<td>
+								<div class="codetail-label">Facsimile No.</div>
+								<input type="text" data-ng-model="proposal.fac_no" size="24" >
+							</td>
+							<td>
+								<div class="codetail-label">Web</div>
+								<input type="text" data-ng-model="proposal.web" size="24" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="codetail-label">Primary Contact</div>
+								<input type="text" data-ng-model="proposal.primary_contact" size="24" >
+							</td>
+							<td>
+								<div class="codetail-label">A.C.N.</div>
+								<input type="text" data-ng-model="proposal.acn" size="24" >
+							</td>
+							<td>
+								<div class="codetail-label">A.B.N.</div>
+								<input type="text" data-ng-model="proposal.abn" size="24" >
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="codetail-label">POC Email Address</div>
+								<input type="text" data-ng-model="proposal.poc_email" size="62" 
+								       placeholder="andrew.bridge@briston.com.au">
+							</td>
+							<td>
+								<div class="codetail-label">Mobile No.</div>
+								<input type="text" data-ng-model="proposal.mobile_no" size="24" 
+								       placeholder="0404 036 591">
+							</td>
+						</tr>
+					</table>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- COMPANY OVERVIEW !-->
+		<div class="pages" data-ng-show="page == 3">
+			<div class="title">Company Overview</div>
+			<div class="content">
+				<form action="">
+					<textarea name="company_overview" id="company_overview" cols="30" rows="10"></textarea>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- CONFIRMATION OF REQUIREMENTS !-->
+		<div class="pages" data-ng-show="page == 4">
+			<div class="title">Confirmation of Requirements</div>
+			<div class="content">
+				<form action="">
+					<textarea id="confirmation_of_requirements" cols="30" rows="10"></textarea>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- SCOPE OF WORKS !-->
+		<div class="pages" data-ng-show="page == 5">
+			<div class="title">Scope of Works</div>
+			<div class="content">
+				<form action="">
+					<textarea id="scope_of_works" cols="30" rows="10"></textarea>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- COST ESTIMATE !-->
+		<div class="pages" data-ng-show="page == 6">
+			<div class="title">Cost Estimate</div>
+			<div class="content">
+				<form action="">
+					<textarea id="cost_estimate" cols="30" rows="10"></textarea>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- CONCLUSION MOVING FORWARD !-->
+		<div class="pages" data-ng-show="page == 7">
+			<div class="title">Conclusion Moving Forward</div>
+			<div class="content">
+				<form action="">
+					<textarea id="conclusion" cols="30" rows="10"></textarea>
+					<br>
+					<div class="alignright">
+						<span class="pagemessage"></span>
+						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<span data-ng-if="message" class="success">Updated Successfully.</span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- PREVIEW !-->
+		<div class="pages" data-ng-show="page == 8">
+			<div class="title">Preview</div>
+			<div class="content">
+				<strong>Preview Proposal as:</strong><br/><br/>
+				<input type="radio" name="export" data-ng-model="export_as" value="PDF"> PDF <br/>
+				<input type="radio" name="export" data-ng-model="export_as" value="Word"> Word <br/>
+				<br/>
+				<input type="button" value="Export Proposal" data-ng-click="export_proposal()">
+			</div>
+		</div>
+
+		<!-- UPLOAD IMAGES !-->
+		<div class="pages" data-ng-show="page == 9">
+			<div class="title">Upload Images</div>
+			<div class="content">
+				<strong>Max size is 800kb</strong> 
+				<span class="error" data-ng-if="image_message">{{ image_message }}</span>
+				<br/>
+				<form method="POST" enctype="multipart/form-data" target="imageupload_iframe" action="app/images/post/upload.php">
+					Upload an image: <input type="file" name="image"> 
+					<input type="submit" value="Upload">
+					<input type="hidden" value="{{ proposal.id }}" name="proposal_id">
+				</form>
+				<iframe name="imageupload_iframe" id="imageupload_iframe" iframeloader="" loaded="upload_callback(message)" style="display:none;"></iframe>
+				<br/>
+				<span data-ng-if="images.length > 0">Please refresh to apply images on editors.</span>
+				<ul>
+					<li data-ng-repeat="image in images">
+						<a data-ng-click="delete_image(image)">[x]</a> {{ image.name }}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

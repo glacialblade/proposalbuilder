@@ -1,0 +1,81 @@
+.datepicker{
+    width:300px;
+    border:thin solid #aaaaaa;
+    background:white;
+    z-index:1000;
+    margin-top:5px;
+}
+.datepicker_wrapper{
+    /*padding:5px;*/
+}
+.datepicker_header{
+    position:relative;
+    text-align:center;
+    font-weight:bold;
+    color:white;
+    padding:8px;
+    background: #333333;
+}
+.datepicker_header_text{
+    cursor:pointer;
+    width:70%;
+    margin:0 auto;
+}
+.datepicker_header_left{
+    cursor:pointer;
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:15%;
+    height:36px;
+    line-height:35px;
+}
+.datepicker_header_right{
+    cursor:pointer;
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:15%;
+    height:36px;
+    line-height:35px;
+}
+.datepicker_table table{
+    width:100%;
+    font-size:12px;
+    table-layout:fixed;
+    padding:5px;
+}
+.datepicker_table thead tr td{
+    font-weight:bold;
+}
+.datepicker_table tbody tr td{
+    cursor:pointer;
+    background:#eeeeee;
+}
+.datepicker_table tbody tr td.disable{
+    opacity:0.4;
+    filter:alpha(opacity=40);
+}
+.datepicker_table tbody tr td.datepicker_currentval{
+    background:#999999;
+    color:white;
+}
+.datepicker_table tr td{
+    text-align:center;
+    height:25px;
+    color:#333333;
+}
+.datepicker_table tbody tr td:hover{
+    background:#555555;
+    color:white;
+}
+.datepicker_timewrapper{
+    width:280px;
+    margin:0 auto;
+    text-align:center;
+}
+.datepicker_input{
+    width:15px !important;
+    text-align:center;
+    border:1px solid #aaaaaa;
+}

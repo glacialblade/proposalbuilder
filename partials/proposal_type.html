@@ -1,0 +1,53 @@
+<div id="wrapper">
+	<div class="white">
+		<h2 data-ng-if="proposal.proposal_type_id == 1">BRISTON PROPOSALS</h2>
+		<h2 data-ng-if="proposal.proposal_type_id == 2">BOSS PROPOSALS</h2>
+		<div class="textright">
+			<a href="#/"><input type="button" value="Choose Proposal Type"></a><input type="button" value="Add Proposal" data-ng-click="show_modal()">
+		</div>
+		<table class="table">
+			<colgroup width="300"/>
+			<colgroup width="300"/>
+			<colgroup width="200"/>
+			<colgroup width="200"/>
+			<thead>
+				<tr>
+					<td>Title</td>
+					<td>Client Name</td>
+					<td>Date Created</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="p in proposals track by $index">
+					<td><a href="#/edit/{{ p.id }}">{{ p.title }}</a></td>
+					<td>{{ p.client_name }}</td>
+					<td>{{ p.date_modified }}</td>
+				</tr>
+				<tr data-ng-if="!proposals">
+					<td class="error textcenter" colspan="3">No proposals found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="modal" class="create_modal">
+	<div class="title">Add Proposal</div>
+	<div class="body">
+		<span id="createpropsal_message"></span>
+		<form id="form_createproposal">
+			<span data-ng-if="error" class="error">Please answer all the fields<br/><br/></span>
+			Proposal Title <span class="error">*</span><br/>
+			<input type="text" data-ng-model="proposal.title" class="long">
+			<br/><br/>
+			Client Name <span class="error">*</span><br/>
+			<input type="text" data-ng-model="proposal.client_name" class="long">
+			<br/><br/>
+			Submission Date <span class="error">*</span><br/>
+			<input type="text" data-ng-model="proposal.submission_date" class="long" datepicker="submission_date" readonly=true>
+			<br/><br/>
+			<input type="button" value="Create Proposal" data-ng-click="create_proposal()">
+			<a data-ng-click="close_modal()">Close</a>
+		</form>
+	</div>
+</div>

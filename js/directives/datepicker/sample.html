@@ -1,0 +1,34 @@
+<!--
+	data-ng-model: model name
+	datepicker: unique name for datepicker
+	startof: the name of the datepicker you want to set as starting limit
+	endof: the name of the datepicker you want to set as ending limit
+	format: yyyy-mm-dd,yyyy/mm/dd (default is yyyy-mm-dd)
+	time: if timepicker will show (true,false)
+  allowonly: Fix allowed values 
+            {"weeks":[0,1,2,3,4]} 
+            {"days":[0,1,2,3,4,5,6]}
+            {"dates":[0]} 0-31
+            {"greater":"2012-01-01"}
+            {"lesser":"2012-01-01"}
+!-->
+
+Birthday: <input type="text" data-ng-model="birthday" 
+                             datepicker="birthday" />
+
+Start Date: <input type="text" data-ng-model="startdate"
+                               datepicker="startdate" 
+                               startof="enddate" />
+                               
+End Date: <input type="text" data-ng-model="enddate"
+                             datepicker="enddate" 
+                             endof="startdate" />
+                               
+With Time: <input type="text" data-ng-model="withtime"
+                              datepicker="withtime"
+                              time="true" />
+
+Allow Only: <input type="text" 
+                   data-ng-model="sample"
+                   datepicker="sample"
+                   allowonly='{"days":[0]}' />
