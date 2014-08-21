@@ -2,3 +2,9 @@ html,body{
 	font-family:arial;
 	font-size:12px;
 }
+table{
+	border-collapse:collapse;
+}
+table tr td{
+	padding:8px;
+}

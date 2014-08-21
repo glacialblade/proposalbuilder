@@ -36,13 +36,59 @@
           AND p.id = {$data['proposal_id']}
 	",false);
 
+	if($proposal->proposal_type_id == 1){
+		class MYPDF extends TCPDF {
+		    public function Header() {
+		        // Logo=
+		        $image_file = '../../classes/tcpdf/images/briston_header.jpg';
+		        $this->Image($image_file, 23, 10, 162, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		        // Set font
+		        $this->SetFont('helvetica', 'B', 20);
+		        // Title
+		        //$this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		    }
+		    public function Footer() {
+		        $image_file = '../../classes/tcpdf/images/briston_footer.jpg';
+		    	$this->Image($image_file, 23, 268, 162, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		        // Position at 15 mm from bottom
+		        $this->SetY(-15);
+		        // Set font
+		        $this->SetFont('helvetica', 'I', 10);
+		        // Page number
+		        $this->Cell(173, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		    }
+		}
+	}
+	else if($proposal->proposal_type_id == 2){
+		class MYPDF extends TCPDF {
+		    public function Header() {
+		        // Logo=
+		        $image_file = '../../classes/tcpdf/images/boss_header.jpg';
+		        $this->Image($image_file, 15, 10, 180, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		        // Set font
+		        $this->SetFont('helvetica', 'B', 20);
+		        // Title
+		        //$this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+		    }
+		    public function Footer() {
+		        $image_file = '../../classes/tcpdf/images/boss_footer.jpg';
+		    	$this->Image($image_file, 15, 284, 180, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+		        // Position at 15 mm from bottom
+		        $this->SetY(-15);
+		        // Set font
+		        $this->SetFont('helvetica', 'I', 10);
+		        // Page number
+		        $this->Cell(345, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+		    }
+		}
+	}
 	// create new PDF document
-	$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+	$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 	// set document information
 	$pdf->SetCreator(PDF_CREATOR);
-	$pdf->SetAuthor('Kevin Cotongco');
-	$pdf->SetTitle('Test Proposal');
+	$pdf->SetAuthor($proposal->client_name);
+	$pdf->SetTitle($proposal->title);
 
 	// set default header data
 	//$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 006', PDF_HEADER_STRING);
@@ -55,7 +101,6 @@
 	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 	// set margins
-	$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 	$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -64,7 +109,7 @@
 
 	// set image scale factor
 	$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
+	$pdf->setListIndentWidth(4);
 	// set some language-dependent strings (optional)
 	if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 		require_once(dirname(__FILE__).'/lang/eng.php');
@@ -75,9 +120,36 @@
 
 	// set font
 	$pdf->SetFont('helvetica', '', 10);
+	$pdf->SetMargins(25, 10, 25);
 
-	// add a page
+/* ==================COVER PAGE================= */
+	$pdf->SetPrintHeader(false);
+	$pdf->SetPrintFooter(false); 
 	$pdf->AddPage();
+	$html = <<<EOF
+	<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_bg.jpg" />
+EOF;
+	$pdf->SetMargins(0, 0, 10);
+	$pdf->writeHTML($html, true, false, true, false, '');
+
+	$html = <<<EOF
+<br/><br/><br/><br/>
+<div style="text-align:right;color:#1a69e0;">
+	<em>
+	<span style="font-size:18px;font-weight:bold;">{$proposal->client_name}</span>
+	<br/>
+	<span style="font-size:14px">{$proposal->submission_date}</span>
+	</em>
+</div>
+EOF;
+	$pdf->writeHTML($html, true, false, true, false, '');
+/* ===============END COVER PAGE================= */
+
+	$pdf->SetMargins(25, 35, 25);
+	/* START OF SLIDES */
+	$pdf->SetPrintHeader(true);
+	$pdf->AddPage();
+	$pdf->SetPrintFooter(true); 
 
 	// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
 	// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
@@ -92,12 +164,9 @@
 	table{
 		line-height:20px;
 	}
-	.label{
-		font-size:14px;
-	}
 </style>
 
-<strong style="color:#005892;font-size:18px;">Company Details</strong><br/><br/>
+<strong style="color:#1a69e0;font-size:16px;">Company Details</strong><br/><br/>
 <table border="1" style="border-color:white;" cellpadding="8">
 	<tr>
 		<td colspan="3">
@@ -162,34 +231,34 @@ EOF;
 
 	// COMPANY OVERVIEW
 	$pdf->addPage();
-	$page_head = '<strong style="color:#005892;font-size:18px;">Company Overview</strong><br/><br/>';
+	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Company Overview</strong>';
 	$pdf->writeHTML($page_head.$proposal->company_overview, true, false, true, false, '');
 
 	// CONFIRMATION OF REQUIREMENTS
 	$pdf->addPage();
-	$page_head = '<strong style="color:#005892;font-size:18px;">Confirmation of Requirements</strong><br/><br/>';
+	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Confirmation of Requirements</strong>';
 	$pdf->writeHTML($page_head.$proposal->confirmation_of_requirements, true, false, true, false, '');
 
 	// SCOPE OF WORKS
 	$pdf->addPage();
-	$page_head = '<strong style="color:#005892;font-size:18px;">Scope of Works</strong><br/><br/>';
+	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Scope of Works</strong>';
 	$pdf->writeHTML($page_head.$proposal->scope_of_works, true, false, true, false, '');
 
 	// COST ESTIMATE
 	$pdf->addPage();
-	$html = '<strong style="color:#005892;font-size:18px;">Cost Estimate</strong>';
+	$html = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Cost Estimate</strong>';
 	$pdf->writeHTML($html.$proposal->cost_estimate, true, false, true, false, '');
 
-	// COST ESTIMATE
+	// CONCLUSION
 	$pdf->addPage();
-	$html = '<strong style="color:#005892;font-size:18px;">Conclusion</strong>';
+	$html = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Conclusion</strong>';
 	$pdf->writeHTML($html.$proposal->conclusion, true, false, true, false, '');
 
 	// ---------------------------------------------------------
 
 	//Close and output PDF document
-	//$pdf->Output($proposal->title.'.pdf', 'I');
-	$pdf->Output($proposal->title.'.pdf', 'FD');
+	$pdf->Output($proposal->title.'.pdf', 'I');
+	//$pdf->Output($proposal->title.'.pdf', 'FD');
 
 	//============================================================+
 	// END OF FILE

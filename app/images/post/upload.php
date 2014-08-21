@@ -17,7 +17,7 @@
 		$name = $files['name'];
 		//$value = "data:".$files['type'].";base64,".base64_encode(file_get_contents($files['tmp_name']));
 		$unique_key = substr(md5(rand(0, 1000000)), 0, 7);
-		$path = "images/media".$unique_key."_".$name;
+		$path = "images/media/".$unique_key."_".$name;
 
 		if(move_uploaded_file($files['tmp_name'],"../../../".$path)){
 			$result = $database->transaction("

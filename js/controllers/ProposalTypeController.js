@@ -27,7 +27,12 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory){
 		else{
 			var promise = ProposalsFactory.create_proposal($scope.proposal);
 			promise.then(function(data){
-				$window.location.href = "#/edit/"+($scope.proposals[0].id*1+1);
+				if($scope.proposals){
+					$window.location.href = "#/edit/"+($scope.proposals[0].id*1+1);
+				}
+				else{
+					$window.location.reload();
+				}
 			}).then(null,function(){
 				$scope.error = true;
 			})

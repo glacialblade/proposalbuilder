@@ -10,7 +10,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		$scope.proposal_id = $routeParams.id;
 		$scope.fetch_proposal();
 	});
-
+	
 	$scope.fetch_proposal = function(){
 		var promise = ProposalsFactory.fetch_proposal({proposal_id:$scope.proposal_id});
 		promise.then(function(data){
@@ -21,17 +21,17 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		})
 	}
 
-	$scope.change_page = function(page){
-		$scope.message = false;
-		$scope.image_message = false;
-		$scope.page = page;
-	}
-
 	$scope.edit_proposal = function(){
 		var promise = ProposalsFactory.edit_proposal($scope.proposal);
 		promise.then(function(data){
 			$scope.message = true;
 		}).then(null,function(){ })
+	}
+
+	$scope.change_page = function(page){
+		$scope.message = false;
+		$scope.image_message = false;
+		$scope.page = page;
 	}
 
 	$scope.upload_callback = function(message){
@@ -60,7 +60,8 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		}).then(null,function(data){
 			$scope.images = null;
 		}).then(function(){
-			$scope.fix_tinymce();
+			$scope.tinymce_destroy();
+			$scope.tinymce_init();
 		})
 	}
 
@@ -73,43 +74,46 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		})
 	}
 
-	$scope.fix_tinymce = function(){
+	$scope.tinymce_init = function(){
 		var tinymce_ids = ["#company_overview","#confirmation_of_requirements","#scope_of_works","#cost_estimate","#conclusion"]
-		// REMOVE EDITORS
+		for(var i in tinymce_ids){
+			var image = "";
+			if(i == 0){
+				image = "image";
+			}
+
+			$(tinymce_ids[i]).val($scope.proposal[tinymce_ids[i].replace("#","")]);
+			tinymce.init({
+				setup : function(ed) {
+			    	ed.on('GetContent', function(e) {
+			    		var key = e.target.id;
+					    $scope.proposal[key] = e.content;
+					});
+			   	},
+				selector: tinymce_ids[i],
+				theme: "modern",
+				width: "100%",
+				height: 300,
+				plugins: [
+					"advlist link "+image+" lists hr pagebreak",
+					"searchreplace wordcount insertdatetime nonbreaking",
+					"table contextmenu directionality paste textcolor"
+				],
+				relative_urls : false,
+				remove_script_host : false,
+				convert_urls : true,
+				image_list: $scope.forupload,
+				content_css: "css/editor-style.css",
+				toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor"
+			});
+		}
+	}
+	$scope.tinymce_destroy = function(){
+		var tinymce_ids = ["#company_overview","#confirmation_of_requirements","#scope_of_works","#cost_estimate","#conclusion"]
 		for(var i in tinymce_ids){
 			tinymce.EditorManager.execCommand('mceRemoveEditor',true,tinymce_ids[i].replace("#",""));
 		}
-
-		// INITIALIZE EDITORS
-		tinymce.init({
-			setup : function(ed) {
-		    	ed.on('GetContent', function(e) {
-		    		var key = e.target.id;
-				    $scope.proposal[key] = e.content;
-				});
-		   	},
-			selector: tinymce_ids.join(","),
-			theme: "modern",
-			width: "100%",
-			height: 300,
-			plugins: [
-				"advlist link image lists hr pagebreak",
-				"searchreplace wordcount insertdatetime nonbreaking",
-				"table contextmenu directionality paste textcolor"
-			],
-			image_list: $scope.forupload,
-			content_css: "css/editor-style.css",
-			toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor"
-		});
-
-		// FIX VALUES OF EDITORS
-		for(var i in tinymce_ids){
-			$(tinymce_ids[i]).val($scope.proposal[tinymce_ids[i].replace("#","")]);
-		}
 	}
-
-	$scope.open_modal = function(){ $(".export_modal").fadeIn(); }
-	$scope.close_modal = function(){ $(".export_modal").fadeOut(); }
 
 	$scope.export_proposal = function(){
 		if($scope.export_as == "PDF"){
