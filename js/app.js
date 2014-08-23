@@ -1,4 +1,4 @@
-var proposalbuilder = angular.module("proposalbuilder",["ngRoute","ngCookies","datepicker"]);
+var proposalbuilder = angular.module("proposalbuilder",["ngRoute","ngCookies","datepicker","iframeloader"]);
 
 proposalbuilder.config(function($routeProvider){
 	$routeProvider
@@ -17,6 +17,10 @@ proposalbuilder.config(function($routeProvider){
 	.when("/edit/:id",{
 		templateUrl:"partials/edit.html",
 		controller:"EditController"
+	})
+	.when("/admin/users",{
+		templateUrl:"partials/admin/users.html",
+		controller:"AdminUsersController"
 	})
 	.otherwise({redirectTo:"/"});
 });

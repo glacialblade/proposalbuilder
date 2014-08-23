@@ -1,0 +1,67 @@
+<div id="wrapper">
+	<div class="white">
+		<h2 data-ng-if="proposal.proposal_type_id == 1">BRISTON PROPOSALS</h2>
+		<h2 data-ng-if="proposal.proposal_type_id == 2">BOSS PROPOSALS</h2>
+		<div class="textright"><input type="button" value="Add User" data-ng-click="show_modal()">
+		</div>
+		<table class="table">
+			<colgroup width="300"/>
+			<colgroup width="300"/>
+			<colgroup width="200"/>
+			<colgroup width="200"/>
+			<thead>
+				<tr>
+					<td>Client Name</td>
+					<td>Email Address</td>
+					<td>User Type</td>
+					<td>Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="u in users">
+					<td>{{ u.fname + " " + u.lname }}</td>
+					<td>{{ u.email }}</td>
+					<td data-ng-if="u.user_type == 1">Administrator</td>
+					<td data-ng-if="u.user_type == 2">User</td>
+					<td>
+						<a href="">Edit</a>
+						<a data-ng-click="delete_user(u.id)">Delete</a>
+					</td>
+				</tr>
+				<tr data-ng-if="!users">
+					<td class="error textcenter" colspan="4">No users found.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="modal" class="create_modal">
+	<div class="title">Add User</div>
+	<div class="body">
+		<span id="createpropsal_message"></span>
+		<form id="form_createproposal">
+			<span data-ng-if="error" class="error">{{ error }}<br/><br/></span>
+			Email Address <span class="error">*</span><br/>
+			<input type="text" data-ng-model="user.email" class="long">
+			<br/><br/>
+			Password <span class="error">*</span><br/>
+			<input type="password" data-ng-model="user.password" class="long">
+			<br/><br/>
+			First Name <span class="error">*</span><br/>
+			<input type="text" data-ng-model="user.fname" class="long">
+			<br/><br/>
+			Last Name <span class="error">*</span><br/>
+			<input type="text" data-ng-model="user.lname" class="long">
+			<br/><br/>
+			User Type <span class="error">*</span><br/>
+			<select data-ng-model="user.user_type" class="long">
+				<option value="1">Administrator</option>
+				<option value="2">User</option>
+			</select>
+			<br/><br/>
+			<input type="button" value="Save" data-ng-click="create_user()">
+			<a data-ng-click="close_modal()">Close</a>
+		</form>
+	</div>
+</div>

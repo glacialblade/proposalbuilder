@@ -14,6 +14,27 @@ proposalbuilder.factory("UsersFactory",function($http){
 			method:"POST"
 		});
 	}
+	factory.fetch_users = function(data){
+		return $http({
+			url:"app/users/post/fetch_users.php",
+			method:"POST",
+			data:data
+		});
+	}
+	factory.create_user = function(data){
+		return $http({
+			url:"app/users/post/create_user.php",
+			method:"POST",
+			data:data
+		});
+	}
+	factory.delete_user = function(data){
+		return $http({
+			url:"app/users/post/delete_user.php",
+			method:"POST",
+			data:data
+		});
+	}
 
 	return factory;
 });

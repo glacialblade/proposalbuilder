@@ -1,9 +1,10 @@
 CREATE TABLE users(
 	id int(100) primary key auto_increment,
-	fname text,
-	lname text,
-	email text not null,
-	password text not null
+	fname text not null,
+	lname text not null,
+	email varchar(250) not null,
+	password text not null,
+	UNIQUE(email)
 );
 
 CREATE TABLE proposal_types(

@@ -5,10 +5,11 @@
 	$data = $database->cleandata($request);
 
 	$return = $database->get("
-		SELECT id,email,fname,lname
+		SELECT id,email,fname,lname,user_type
 		FROM users 
 		WHERE email='".$data['email']."' 
 		  AND password='".md5($data['password'])."'
+		  AND archived = 0
 	",false);
 
 	if($return){
