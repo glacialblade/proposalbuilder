@@ -4,12 +4,33 @@ CREATE TABLE users(
 	lname text not null,
 	email varchar(250) not null,
 	password text not null,
+	user_type int(100) not null,
+	archived int(100) default 0,
 	UNIQUE(email)
 );
 
 CREATE TABLE proposal_types(
 	id int(100) primary key auto_increment,
 	type text not null
+);
+
+CREATE TABLE proposals(
+	id int(100) primary key auto_increment,
+	title text not null,
+	client_name text not null,
+	submission_date date,
+	company_overview text,
+	confirmation_of_requirements text,
+	scope_of_works text,
+	cost_estimate text,
+	conclusion text,
+	date_modified date,
+	date_created timestamp default CURRENT_TIMESTAMP,
+	status varchar(250) default 'Draft',
+	proposal_type_id int(100) not null,
+	user_id int(100) not null,
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(proposal_type_id) REFERENCES proposal_types(id)
 );
 
 CREATE TABLE company_details (
@@ -28,25 +49,6 @@ CREATE TABLE company_details (
 	mobile_no text,
 	proposal_id int(100) not null,
 	FOREIGN KEY(proposal_id) REFERENCES proposals(id)
-)
-
-CREATE TABLE proposals(
-	id int(100) primary key auto_increment,
-	title text not null,
-	client_name text not null,
-	submission_date date,
-	company_overview text,
-	confirmation_of_requirements text,
-	scope_of_works text,
-	company_estimate text,
-	conclusion text,
-	date_modified date,
-	date_created timestamp default CURRENT_TIMESTAMP,
-	status varchar(250) default 'Draft',
-	proposal_type_id int(100) not null,
-	user_id int(100) not null,
-	FOREIGN KEY(user_id) REFERENCES users(id),
-	FOREIGN KEY(proposal_type_id) REFERENCES proposal_types(id)
 );
 
 CREATE TABLE images(
