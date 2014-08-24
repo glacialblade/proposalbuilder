@@ -38,7 +38,7 @@
 	$pagebreak = '<br style="page-break-before: always">';
 
 	header("Content-type: application/vnd.ms-word");
-	header("Content-Disposition: attachment;Filename=document_name.doc");
+	header("Content-Disposition: attachment;Filename={$proposal->title}.doc");
 
 	if($proposal->proposal_type_id == 1){
 		$header = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_header.jpg';
@@ -53,20 +53,16 @@
 		$cover_page = '<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_bg.jpg" />';
 	}
 
+	$rowspan="6";
 	$trading = "";
 	if($proposal->proposal_type_id == "2"){
+		$rowspan="7";
 		$trading = '<tr><td colspan="3"><strong class="label">Trading Name</strong><br/>'.$proposal->trading_name.'</td></tr>';
 	}
 	$company_details = <<<EOF
-<style>
-	table{
-		line-height:20px;
-	}
-</style>
-
-<strong style="color:#1a69e0;font-size:16px;">Company Details</strong><br/><br/>
-<table border="1" style="border-color:white;" cellpadding="8">
+<table style="width:100%" cellpadding="8" id="companydetails">
 	<tr>
+		<td rowspan="{$rowspan}" style="border:1px solid black;background-color:#99ccff;text-align:center;"><strong>COMPANY DETAILS</strong></td>
 		<td colspan="3">
 			<strong class="label">Legal Name of Company</strong><br/>
 			{$proposal->legal_name}
@@ -188,12 +184,20 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		html,body{
 			font-family:arial;
 		}
-		#content ul li{
+		#content2 ul li{
 			font-family:arial;
 		}
-		#content{
-			font-size:14px;
+		#content2{
+			font-size:12px;
 			line-height:20px;
+		}
+		#content2 table{
+			font-size:12px;
+			line-height:20px;
+			border-collapse:collapse;
+		}
+		#companydetails tr td{
+			border:1px solid black;
 		}
 		#footer{
 			font-size:12px;
@@ -223,7 +227,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	</div>
 
 	<div class="Section2">
-		<div id="content">
+		<div id="content2">
 			{$company_details}
 			<br style="page-break-before: always">
 			{$proposal->company_overview}

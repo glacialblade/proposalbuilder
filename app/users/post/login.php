@@ -11,11 +11,7 @@
 		  AND password='".md5($data['password'])."'
 		  AND archived = 0
 	",false);
-	echo "SELECT id,email,fname,lname,user_type
-		FROM users 
-		WHERE email='".$data['email']."' 
-		  AND password='".md5($data['password'])."'
-		  AND archived = 0";
+	
 	if($return){
 		session_start();
 		$_SESSION['id'] = $return->id;

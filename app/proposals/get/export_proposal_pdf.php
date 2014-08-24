@@ -164,7 +164,11 @@ EOF;
 
 	// COMPANY DETAILS
 	$trading = "";
+	$rowspan="6";
+	$lineheight = "350";
 	if($proposal->proposal_type_id == "2"){
+		$lineheight = "380";
+		$rowspan="7";
 		$trading = '<tr><td colspan="3"><strong class="label">Trading Name</strong><br/>'.$proposal->trading_name.'</td></tr>';
 	}
 	$html = <<<EOF
@@ -177,6 +181,9 @@ EOF;
 <strong style="color:#1a69e0;font-size:16px;">Company Details</strong><br/><br/>
 <table border="1" style="border-color:white;" cellpadding="8">
 	<tr>
+		<td rowspan="{$rowspan}" style="line-height:{$lineheight}px;text-align:center;background-color:#99ccff;">
+			Company Details
+		</td>
 		<td colspan="3">
 			<strong class="label">Legal Name of Company</strong><br/>
 			{$proposal->legal_name}
@@ -265,8 +272,8 @@ EOF;
 	// ---------------------------------------------------------
 
 	//Close and output PDF document
-	$pdf->Output($proposal->title.'.pdf', 'I');
-	//$pdf->Output($proposal->title.'.pdf', 'FD');
+	//$pdf->Output($proposal->title.'.pdf', 'I');
+	$pdf->Output($proposal->title.'.pdf', 'FD');
 
 	//============================================================+
 	// END OF FILE
