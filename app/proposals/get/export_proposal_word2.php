@@ -1,6 +1,6 @@
 <?php
-	require_once('../../classes/check.php');
-	require_once('../../classes/database.php');
+	require_once('classes/check.php');
+	require_once('classes/database.php');
 	$database = new Database();
 	$data = $database->cleandata($_GET);
 
@@ -49,7 +49,7 @@
 	else{
 		$header = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_header.jpg';
 		$footer = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_footer.jpg';
-		$tab_stops = 'center 3.0in right 7.5in';
+		$tab_stops = 'center 3.0in right 10.0in';
 		$cover_page = '<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_bg.jpg" />';
 	}
 
@@ -151,6 +151,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			margin:1cm 1cm 1cm 1cm;
 		}
 		@page Section1 {
+			margin:1.0in 0.0in 1.0in 0.0in;
+			mso-header-margin:.5in;
 			mso-footer-margin:.5in;
 			mso-header: h1;
 			mso-footer: f1;
@@ -186,10 +188,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	</xml>
 	<style>
 		html,body{
-			font-family:arial;
-		}
-		#content ul li{
-			font-family:arial;
+			font-family:cambria;
 		}
 		#content{
 			font-size:14px;
@@ -204,20 +203,8 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 <body>
 	<div class="Section1">
-		<div id="content" style="margin:-0.4in">
+		<div id="content">
 			{$cover_page}
-			<br/>
-			<table style="width:100%;">
-				<tr>
-					<td style="color:#1a69e0;text-align:right;">
-						<em>
-						<span style="font-size:18px;font-weight:bold;">{$proposal->client_name}</span>
-						<br/>
-						<span style="font-size:14px">{$proposal->submission_date}</span>
-						</em>
-					</td>
-				</tr>
-			</table>
 			<br style="page-break-before:always; clear:both; mso-break-type:section-break">
 		</div>
 	</div>
@@ -232,7 +219,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			<br style="page-break-before: always">
 			{$proposal->scope_of_works}
 			<br style="page-break-before: always">
-			{$proposal->cost_estimate}
+			{$proposal->cont_estimate}
 			<br style="page-break-before: always">
 			{$proposal->conclusion}
 		</div>
@@ -264,25 +251,23 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				<div style='mso-element:footer' id=f1>
 					<span style='position:relative;z-index:-1'> 
 						<img src="{$footer}" />
-						<!--
+						
 						<p class=MsoFooter>
 							<span style=mso-tab-count:2'></span>
 							Page <span style='mso-field-code: PAGE '></span> of
 								 <span style='mso-field-code: NUMPAGES '></span>
 						</p>
-						!-->
 					</span>
 				</div>
 				<div style='mso-element:footer' id=f2>
 					<span style='position:relative;z-index:-1'> 
 						<img src="{$footer}" />
-						<!--
+						
 						<p class=MsoFooter>
 							<span style=mso-tab-count:2'></span>
 							Page <span style='mso-field-code: PAGE '></span> of
 								 <span style='mso-field-code: NUMPAGES '></span>
 						</p>
-						!-->
 					</span>
 				</div>
 

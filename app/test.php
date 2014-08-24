@@ -1,6 +1,6 @@
 <?php
-	require_once('../../classes/check.php');
-	require_once('../../classes/database.php');
+	require_once('classes/check.php');
+	require_once('classes/database.php');
 	$database = new Database();
 	$data = $database->cleandata($_GET);
 
@@ -206,7 +206,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	<div class="Section1">
 		<div id="content" style="margin:-0.4in">
 			{$cover_page}
-			<br/>
+			<br/><br/>
 			<table style="width:100%;">
 				<tr>
 					<td style="color:#1a69e0;text-align:right;">
@@ -232,7 +232,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 			<br style="page-break-before: always">
 			{$proposal->scope_of_works}
 			<br style="page-break-before: always">
-			{$proposal->cost_estimate}
+			{$proposal->cont_estimate}
 			<br style="page-break-before: always">
 			{$proposal->conclusion}
 		</div>

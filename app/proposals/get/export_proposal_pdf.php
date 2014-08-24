@@ -126,9 +126,17 @@
 	$pdf->SetPrintHeader(false);
 	$pdf->SetPrintFooter(false); 
 	$pdf->AddPage();
+	if($proposal->proposal_type_id == 1){
 	$html = <<<EOF
 	<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_bg.jpg" />
 EOF;
+	}
+	else if($proposal->proposal_type_id == 2){
+	$html = <<<EOF
+	<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_bg.jpg" />
+EOF;
+	}
+
 	$pdf->SetMargins(0, 0, 10);
 	$pdf->writeHTML($html, true, false, true, false, '');
 
@@ -231,27 +239,27 @@ EOF;
 
 	// COMPANY OVERVIEW
 	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Company Overview</strong>';
+	$page_head = '<style>p{ line-height:20px; }</style>';
 	$pdf->writeHTML($page_head.$proposal->company_overview, true, false, true, false, '');
 
 	// CONFIRMATION OF REQUIREMENTS
 	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Confirmation of Requirements</strong>';
+	$page_head = '<style>p{ line-height:20px; }</style>';
 	$pdf->writeHTML($page_head.$proposal->confirmation_of_requirements, true, false, true, false, '');
 
 	// SCOPE OF WORKS
 	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Scope of Works</strong>';
+	$page_head = '<style>p{ line-height:20px; }</style>';
 	$pdf->writeHTML($page_head.$proposal->scope_of_works, true, false, true, false, '');
 
 	// COST ESTIMATE
 	$pdf->addPage();
-	$html = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Cost Estimate</strong>';
+	$html = '<style>p{ line-height:20px; }</style>';
 	$pdf->writeHTML($html.$proposal->cost_estimate, true, false, true, false, '');
 
 	// CONCLUSION
 	$pdf->addPage();
-	$html = '<style>p{ line-height:20px; }</style><strong style="color:#1a69e0;font-size:16px;">Conclusion</strong>';
+	$html = '<style>p{ line-height:20px; }</style>';
 	$pdf->writeHTML($html.$proposal->conclusion, true, false, true, false, '');
 
 	// ---------------------------------------------------------
