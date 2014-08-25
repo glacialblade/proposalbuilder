@@ -24,8 +24,7 @@
 					<td data-ng-if="u.user_type == 1">Administrator</td>
 					<td data-ng-if="u.user_type == 2">User</td>
 					<td>
-						<a href="">Edit</a>
-						<a data-ng-click="delete_user(u.id)">Delete</a>
+						<a data-ng-click="delete_user(u.id)" data-ng-if="u.usertype == 2">Delete</a>
 					</td>
 				</tr>
 				<tr data-ng-if="!users">
