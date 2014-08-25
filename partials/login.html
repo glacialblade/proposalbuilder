@@ -9,6 +9,7 @@
 		<strong>Password: <span class="error">*</span></strong><br/>
 		<input type="password" data-ng-model="user.password" class="long">
 		<br/><br/>
-		<input type="button" value="Login" data-ng-click="login()">
+		<input type="button" value="Login" data-ng-click="login()" data-ng-disabled="loader_login">
+		<img src="images/ajax-loader.gif" data-ng-if="loader_login" />
 	</div>
 </div>

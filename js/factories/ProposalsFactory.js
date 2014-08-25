@@ -3,7 +3,13 @@ proposalbuilder.factory("ProposalsFactory",function($http){
 
 	factory.fetch_proposals = function(data){
 		return $http({
-			url:"app/proposals/get/fetch_proposals.php?proposal_type_id="+data.proposal_type_id,
+			url:"app/proposals/get/fetch_proposals.php?proposal_type_id="+data.proposal_type_id+"&filter="+data.filter,
+			method:"GET"
+		});
+	}
+	factory.fetch_max_id = function(data){
+		return $http({
+			url:"app/proposals/get/fetch_max_id.php?proposal_type_id="+data.proposal_type_id,
 			method:"GET"
 		});
 	}

@@ -6,6 +6,9 @@
 			    data-ng-click="change_page($index+1)"
 			    data-ng-class="{ 'active':($index+1) == page }">
 				{{ p }}
+
+				<img src="images/ajax-loader.gif" 
+				     data-ng-if="!proposal"/>
 			</li>
 			<li>
 				<a href="#/proposal_type/{{ proposal.proposal_type_id }}">Back to List</a>
@@ -39,7 +42,8 @@
 					<br/>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -120,7 +124,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -136,7 +141,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -152,7 +158,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -168,7 +175,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -184,7 +192,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -200,7 +209,8 @@
 					<br>
 					<div class="alignright">
 						<span class="pagemessage"></span>
-						<input type="button" value="Save" data-ng-click="edit_proposal()">
+						<input type="button" value="Save" data-ng-click="edit_proposal()" data-ng-disabled="loader_edit_proposal">
+						<img src="images/ajax-loader.gif" data-ng-if="loader_edit_proposal"/>
 						<span data-ng-if="message" class="success">Updated Successfully.</span>
 					</div>
 				</form>
@@ -226,10 +236,11 @@
 				<strong>Max size is 800kb</strong> 
 				<span class="error" data-ng-if="image_message">{{ image_message }}</span>
 				<br/>
-				<form method="POST" enctype="multipart/form-data" target="imageupload_iframe" action="app/images/post/upload.php">
+				<form id="form_upload_image" method="POST" enctype="multipart/form-data" target="imageupload_iframe" action="app/images/post/upload.php">
 					Upload an image: <input type="file" name="image"> 
-					<input type="submit" value="Upload">
+					<input type="submit" value="Upload" data-ng-disabled="loader_upload_image" data-ng-click="upload_image()">
 					<input type="hidden" value="{{ proposal.id }}" name="proposal_id">
+					<img src="images/ajax-loader.gif" data-ng-if="loader_upload_image" />
 				</form>
 				<iframe name="imageupload_iframe" id="imageupload_iframe" iframeloader="" loaded="upload_callback(message)" style="display:none;"></iframe>
 				<br/>

@@ -2,9 +2,19 @@
 	<div class="white">
 		<h2 data-ng-if="proposal.proposal_type_id == 1">BRISTON PROPOSALS</h2>
 		<h2 data-ng-if="proposal.proposal_type_id == 2">BOSS PROPOSALS</h2>
-		<div class="textright">
-			<a href="#/"><input type="button" value="Choose Proposal Type"></a><input type="button" value="Add Proposal" data-ng-click="show_modal()">
+		<br/>
+		<div class="textright right">
+			<a href="#/"><input type="button" value="Choose Proposal Type"></a> 
+			<input type="button" value="Add Proposal" data-ng-click="show_modal()">
 		</div>
+		<div class="textleft left" style="margin-bottom:5px;">
+			Filter: <select data-ng-model="filter" data-ng-change="fetch_proposals()">
+						<option>New</option>
+						<option>Old</option>
+	     			</select>
+	     	<img src="images/ajax-loader.gif" data-ng-if="loader_fetch_proposal"/>
+		</div>
+		<div class="clear"></div>
 		<table class="table">
 			<colgroup width="300"/>
 			<colgroup width="300"/>
@@ -14,17 +24,20 @@
 				<tr>
 					<td>Title</td>
 					<td>Client Name</td>
-					<td>Date Created</td>
+					<td>Submission Date</td>
 				</tr>
 			</thead>
 			<tbody>
 				<tr data-ng-repeat="p in proposals track by $index">
 					<td><a href="#/edit/{{ p.id }}">{{ p.title }}</a></td>
 					<td>{{ p.client_name }}</td>
-					<td>{{ p.date_modified }}</td>
+					<td>{{ p.submission_date }}</td>
 				</tr>
-				<tr data-ng-if="!proposals">
+				<tr data-ng-if="!proposals && !loader_fetch_proposal">
 					<td class="error textcenter" colspan="3">No proposals found.</td>
+				</tr>
+				<tr data-ng-if="loader_fetch_proposal">
+					<td class="textcenter" colspan="3">Fetching Proposals.</td>
 				</tr>
 			</tbody>
 		</table>
@@ -46,7 +59,8 @@
 			Submission Date <span class="error">*</span><br/>
 			<input type="text" data-ng-model="proposal.submission_date" class="long" datepicker="submission_date" readonly=true>
 			<br/><br/>
-			<input type="button" value="Create Proposal" data-ng-click="create_proposal()">
+			<input type="button" value="Create Proposal" data-ng-click="create_proposal()" data-ng-disabled="loader_create_proposal">
+			<img src="images/ajax-loader.gif" data-ng-if="loader_create_proposal" />
 			<a data-ng-click="close_modal()">Close</a>
 		</form>
 	</div>

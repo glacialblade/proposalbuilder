@@ -22,19 +22,30 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 	}
 
 	$scope.edit_proposal = function(){
+		$scope.loader_edit_proposal = true;
 		var promise = ProposalsFactory.edit_proposal($scope.proposal);
 		promise.then(function(data){
 			$scope.message = true;
-		}).then(null,function(){ })
+			$scope.loader_edit_proposal = false;
+		}).then(null,function(){ 
+			$scope.loader_edit_proposal = false;
+		})
 	}
 
 	$scope.change_page = function(page){
-		$scope.message = false;
-		$scope.image_message = false;
-		$scope.page = page;
+		if(!$scope.loader_edit_proposal && !$scope.loader_upload_image && $scope.proposal){
+			$scope.message = false;
+			$scope.image_message = false;
+			$scope.page = page;
+		}
 	}
 
+	$scope.upload_image = function(){
+		document.getElementById("form_upload_image").submit();
+		$scope.loader_upload_image = true;
+	}
 	$scope.upload_callback = function(message){
+		$scope.loader_upload_image = false;
 		$scope.image_message = "";
 		if(message == 1){
 			$scope.fetch_images();

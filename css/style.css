@@ -129,6 +129,10 @@ input[type="button"]:active {
 	position:relative;
 	top:1px;
 }
+input[type="button"]:disabled {
+	opacity:0.4;
+	filter:alpha(opacity=40);
+}
 #header{
 	width:100%;
 	background:#005892;
@@ -242,4 +246,10 @@ input[type="button"]:active {
 }
 .company_detail_tbl .codetail-label{
 	font-weight: bold;
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
 }
