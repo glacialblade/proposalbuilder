@@ -77,12 +77,17 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 	}
 
 	$scope.delete_image = function(image){
-		var promise = ImagesFactory.delete_image(image);
-		promise.then(function(data){
-			$scope.fetch_images();
-		}).then(null,function(data){
+		if(!$scope.loader_upload_image){
+			$scope.loader_upload_image = true;
 
-		})
+			var promise = ImagesFactory.delete_image(image);
+			promise.then(function(data){
+				$scope.fetch_images();
+				$scope.loader_upload_image = false;
+			}).then(null,function(data){
+				$scope.loader_upload_image = false;
+			})
+		}
 	}
 
 	$scope.tinymce_init = function(){

@@ -241,6 +241,7 @@
 					<input type="submit" value="Upload" data-ng-disabled="loader_upload_image" data-ng-click="upload_image()">
 					<input type="hidden" value="{{ proposal.id }}" name="proposal_id">
 					<img src="images/ajax-loader.gif" data-ng-if="loader_upload_image" />
+					<span data-ng-if="loader_upload_image">This may take a while</span>
 				</form>
 				<iframe name="imageupload_iframe" id="imageupload_iframe" iframeloader="" loaded="upload_callback(message)" style="display:none;"></iframe>
 				<br/>

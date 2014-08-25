@@ -129,7 +129,7 @@ input[type="button"]:active {
 	position:relative;
 	top:1px;
 }
-input[type="button"]:disabled {
+input[type="button"]:disabled,select:disabled {
 	opacity:0.4;
 	filter:alpha(opacity=40);
 }

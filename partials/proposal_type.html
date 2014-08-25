@@ -8,7 +8,8 @@
 			<input type="button" value="Add Proposal" data-ng-click="show_modal()">
 		</div>
 		<div class="textleft left" style="margin-bottom:5px;">
-			Filter: <select data-ng-model="filter" data-ng-change="fetch_proposals()">
+			Filter: <select data-ng-model="filter" data-ng-change="fetch_proposals()"
+			                data-ng-disabled="loader_fetch_proposal">
 						<option>New</option>
 						<option>Old</option>
 	     			</select>
