@@ -153,7 +153,7 @@ EOF;
 	$pdf->writeHTML($html, true, false, true, false, '');
 /* ===============END COVER PAGE================= */
 
-	$pdf->SetMargins(25, 35, 25);
+	$pdf->SetMargins(25, 40, 25);
 	/* START OF SLIDES */
 	$pdf->SetPrintHeader(true);
 	$pdf->AddPage();
@@ -178,7 +178,7 @@ EOF;
 	}
 </style>
 
-<strong style="color:#1a69e0;font-size:16px;">Company Details</strong><br/><br/>
+<strong style="color:#1a69e0;">Company Details</strong><br/><br/>
 <table border="1" style="border-color:white;" cellpadding="8">
 	<tr>
 		<td rowspan="{$rowspan}" style="line-height:{$lineheight}px;text-align:center;background-color:#99ccff;">
@@ -243,40 +243,29 @@ EOF;
 </table>
 EOF;
 	$pdf->writeHTML($html, true, false, true, false, '');
-
-	// COMPANY OVERVIEW
 	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style>';
-	$pdf->writeHTML($page_head.$proposal->company_overview, true, false, true, false, '');
 
-	// CONFIRMATION OF REQUIREMENTS
-	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style>';
-	$pdf->writeHTML($page_head.$proposal->confirmation_of_requirements, true, false, true, false, '');
-
-	// SCOPE OF WORKS
-	$pdf->addPage();
-	$page_head = '<style>p{ line-height:20px; }</style>';
-	$pdf->writeHTML($page_head.$proposal->scope_of_works, true, false, true, false, '');
-
-	// COST ESTIMATE
-	$pdf->addPage();
-	$html = '<style>p{ line-height:20px; }</style>';
-	$pdf->writeHTML($html.$proposal->cost_estimate, true, false, true, false, '');
-
-	// CONCLUSION
-	$pdf->addPage();
-	$html = '<style>p{ line-height:20px; }</style>';
-	$pdf->writeHTML($html.$proposal->conclusion, true, false, true, false, '');
+	check_file($pdf,$proposal->company_overview,"Company Overview","");
+	check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements","<br/><br/>");
+	check_file($pdf,$proposal->scope_of_works,"Scope of Works","<br/><br/>");
+	check_file($pdf,$proposal->cost_estimate,"Cost Estimate","<br/><br/>");
+	check_file($pdf,$proposal->conclusion,"Conclusion","<br/><br/>");
 
 	// ---------------------------------------------------------
 
 	//Close and output PDF document
-	//$pdf->Output($proposal->title.'.pdf', 'I');
-	$pdf->Output($proposal->title.'.pdf', 'FD');
+	$pdf->Output($proposal->title.'.pdf', 'I');
+	//$pdf->Output($proposal->title.'.pdf', 'FD');
 
 	//============================================================+
 	// END OF FILE
 	//============================================================+
+	function check_file($pdf,$html,$title,$br){
+		$page_head = '<style>p{ line-height:18px; }</style>';
+		$page_head .= '<b style="color:#1a69e0">'.$title.'</b>';
 
+		if(strip_tags($html) != "" && strip_tags($html) != "&nbsp;" && preg_match('/[a-zA-z0-9]+/',strip_tags($html))){
+			$pdf->writeHTML($br.$page_head.$html, true, false, true, false, '');	
+		}
+	}
 ?>

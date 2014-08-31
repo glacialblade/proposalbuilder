@@ -16,7 +16,7 @@
 	$query = "SELECT id,title,client_name,submission_date,status
 	          FROM proposals
 	          WHERE user_id = {$_SESSION['id']}
-	            AND proposal_type_id = {$data['proposal_type_id']}
+	            --AND proposal_type_id = {$data['proposal_type_id']}
 	            {$filter}
 	          ORDER BY id DESC";
 	

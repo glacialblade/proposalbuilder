@@ -196,6 +196,9 @@ input[type="button"]:disabled,select:disabled {
 	color:#1e5799;
 	font-weight:bold;
 }
+.proposal-pages li.list_red{
+	background:#FFAAAA;
+}
 .proposal-pages li.title{
 	font-weight: bold;
 	font-size:14px;

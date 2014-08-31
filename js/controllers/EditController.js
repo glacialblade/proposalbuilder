@@ -1,7 +1,10 @@
 proposalbuilder.controller("EditController",['$scope','$window','$routeParams','RedirectService','ProposalsFactory','ImagesFactory',
 function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFactory){
+	var ctr = 0;
+
 	$scope.$on("$routeChangeSuccess",function(){
 		$(".export_modal").modal({width:300});
+		$scope.edited = {};
 		$scope.export_as = "PDF";
 		
 		$scope.pages = ["Cover Page","Company Details","Company Overview","Confirmation of Requirements","Scope of Works","Cost Estimate","Conclusion","Preview","Upload Images"];
@@ -11,10 +14,19 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		$scope.fetch_proposal();
 	});
 	
+	$scope.compare_values = function(key){
+		ctr++;
+		if(ctr > 10){
+			$scope.edited[key.toUpperCase()] = true;
+		}
+		console.log($scope.edited)
+	}
+
 	$scope.fetch_proposal = function(){
 		var promise = ProposalsFactory.fetch_proposal({proposal_id:$scope.proposal_id});
 		promise.then(function(data){
 			$scope.proposal = data.data;
+			$scope.original_proposal = JSON.parse(JSON.stringify($scope.proposal));
 			$scope.fetch_images();
 		}).then(null,function(data){
 			$window.history.back();
@@ -27,6 +39,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 		promise.then(function(data){
 			$scope.message = true;
 			$scope.loader_edit_proposal = false;
+			$scope.edited = {};
 		}).then(null,function(){ 
 			$scope.loader_edit_proposal = false;
 		})
@@ -104,6 +117,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 			    	ed.on('GetContent', function(e) {
 			    		var key = e.target.id;
 					    $scope.proposal[key] = e.content;
+					    $scope.compare_values(key.replace(/_/g," "))
 					});
 			   	},
 				selector: tinymce_ids[i],

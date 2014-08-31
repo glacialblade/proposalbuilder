@@ -4,7 +4,7 @@
 			<li class="title"><span class="proposal-type"></span> {{ proposal.title }}</li>
 			<li data-ng-repeat="p in pages" 
 			    data-ng-click="change_page($index+1)"
-			    data-ng-class="{ 'active':($index+1) == page }">
+			    data-ng-class="{ 'list_red':edited[p.toUpperCase()],'active':($index+1) == page }">
 				{{ p }}
 
 				<img src="images/ajax-loader.gif" 
@@ -27,15 +27,16 @@
 						<tr>
 							<td>
 								<label for="client-name">Title</label><br/>
-								<input type="text" data-ng-model="proposal.title" size="23" maxlength="50">
+								<input type="text" data-ng-model="proposal.title" size="23" maxlength="50"
+								       data-ng-change="compare_values('Cover Page')">
 							</td>
 							<td>
 								<label for="client-name">Client Name</label><br/>
-								<input type="text" data-ng-model="proposal.client_name" size="23" maxlength="50">
+								<input type="text" data-ng-model="proposal.client_name" size="23" maxlength="50" data-ng-change="compare_values('Cover Page')">
 							</td>
 							<td>
 								<label for="date">Submission</label><br/>
-								<input type="text" data-ng-model="proposal.submission_date" size="23" datepicker="submission_date" readonly=true>
+								<input type="text" data-ng-model="proposal.submission_date" size="23" datepicker="submission_date" readonly=true data-ng-change="compare_values('Cover Page')">
 							</td>
 						</tr>
 					</table>
@@ -59,65 +60,77 @@
 						<tr>
 							<td colspan=3>
 								<div class="codetail-label">Legal Name of Company</div>
-								<input type="text" data-ng-model="proposal.legal_name" size="100">
+								<input type="text" data-ng-model="proposal.legal_name" size="100" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr data-ng-if="proposal.proposal_type_id == 2">
 							<td colspan=3>
 								<div class="codetail-label">Trading Name</div>
-								<input type="text" data-ng-model="proposal.trading_name" size="100">
+								<input type="text" data-ng-model="proposal.trading_name" size="100"
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr>
 							<td colspan=3>
 								<div class="codetail-label">Head Office</div>
-								<input type="text" data-ng-model="proposal.head_office" size="100">
+								<input type="text" data-ng-model="proposal.head_office" size="100"
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr>
 							<td colspan=3>
 								<div class="codetail-label">Postal Address</div>
-								<input type="text" data-ng-model="proposal.postal_address" size="100">
+								<input type="text" data-ng-model="proposal.postal_address" size="100"
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="codetail-label">Telephone No.</div>
-								<input type="text" data-ng-model="proposal.telephone_no" size="24" >
+								<input type="text" data-ng-model="proposal.telephone_no" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 							<td>
 								<div class="codetail-label">Facsimile No.</div>
-								<input type="text" data-ng-model="proposal.fac_no" size="24" >
+								<input type="text" data-ng-model="proposal.fac_no" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 							<td>
 								<div class="codetail-label">Web</div>
-								<input type="text" data-ng-model="proposal.web" size="24" >
+								<input type="text" data-ng-model="proposal.web" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<div class="codetail-label">Primary Contact</div>
-								<input type="text" data-ng-model="proposal.primary_contact" size="24" >
+								<input type="text" data-ng-model="proposal.primary_contact" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 							<td>
 								<div class="codetail-label">A.C.N.</div>
-								<input type="text" data-ng-model="proposal.acn" size="24" >
+								<input type="text" data-ng-model="proposal.acn" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 							<td>
 								<div class="codetail-label">A.B.N.</div>
-								<input type="text" data-ng-model="proposal.abn" size="24" >
+								<input type="text" data-ng-model="proposal.abn" size="24" 
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<div class="codetail-label">POC Email Address</div>
 								<input type="text" data-ng-model="proposal.poc_email" size="62" 
-								       placeholder="andrew.bridge@briston.com.au">
+								       placeholder="andrew.bridge@briston.com.au"
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 							<td>
 								<div class="codetail-label">Mobile No.</div>
 								<input type="text" data-ng-model="proposal.mobile_no" size="24" 
-								       placeholder="0404 036 591">
+								       placeholder="0404 036 591"
+								       data-ng-change="compare_values('Company Details')">
 							</td>
 						</tr>
 					</table>
