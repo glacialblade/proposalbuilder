@@ -1,5 +1,3 @@
-(ANIL)For both the BOSS and Briston proposals – the headers, footers and images on the cover page look a bit blurry Is there a way we can fix that?
-
 (OK)For both the BOSS and Briston proposals – each heading is on a new page.  Is it possible to have the text start just under where the previous text finished?
 
 (OK)For both the BOSS and Briston proposals – the headings should appear within the documents. E.g. Company Overview, Confirmation of Requirements, Scope of Works, etc.  They should be in blue text like the example proposals I sent you.  Maybe you can just have the headings pre-populated within the text fields.
@@ -16,16 +14,22 @@ Can we change the date format to DD MON YEAR?  Both on the Proposal cover page a
 
 (OK)Is it possible to have a notification if we have forget to press “save” on any of the sections.
 
-(ANIL)For the Briston proposal – when published in Word, the name of the client is on the next page instead of on the cover page.
-
 (OK)All users that log in need to be able to see all of the proposals created by themselves and the other users.  E.g. Andrew Bridge will need to be able to view/access a proposal that I have written.  Currently the proposals that I have written do not appear under Andrew’s or Da-en’s login.
 
-(ANIL)In the BOSS proposal, can you please include the “So why use us?” section under the “Company Overview”.  Please refer to the sample proposal I sent you.
-        
 (OK NA)In the “Add Proposal” popup.  Can you please change “Proposal Title” to “File Name”?
         
-(ANIL)For the Briston proposal – the second page of the Company Overview is missing from the pre-populated text.  Please refer to the sample proposal I sent you.  Also, include the “Company Status” section at the bottom J
-
 (OK NA)For the Briston proposal – can you please remove the pre-populated text above “Conclusion – Moving forward”
 
 (OK NA)For the BOSS proposal – can you please change the pre-populated text for the Conclusion to:
+
+
+
+
+
+(ANIL)For both the BOSS and Briston proposals – the headers, footers and images on the cover page look a bit blurry Is there a way we can fix that?
+
+(ANIL)For the Briston proposal – when published in Word, the name of the client is on the next page instead of on the cover page.
+
+(ANIL)In the BOSS proposal, can you please include the “So why use us?” section under the “Company Overview”.  Please refer to the sample proposal I sent you.
+        
+(ANIL)For the Briston proposal – the second page of the Company Overview is missing from the pre-populated text.  Please refer to the sample proposal I sent you.  Also, include the “Company Status” section at the bottom J

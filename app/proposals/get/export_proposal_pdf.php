@@ -9,7 +9,7 @@
 		SELECT p.id,
                p.title,
                p.client_name,
-               p.submission_date,
+               DATE_FORMAT(p.submission_date,'%d, %b %Y') as submission_date,
                p.company_overview,
                p.confirmation_of_requirements,
                p.scope_of_works,
@@ -245,27 +245,27 @@ EOF;
 	$pdf->writeHTML($html, true, false, true, false, '');
 	$pdf->addPage();
 
-	check_file($pdf,$proposal->company_overview,"Company Overview","");
-	check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements","<br/><br/>");
-	check_file($pdf,$proposal->scope_of_works,"Scope of Works","<br/><br/>");
-	check_file($pdf,$proposal->cost_estimate,"Cost Estimate","<br/><br/>");
-	check_file($pdf,$proposal->conclusion,"Conclusion","<br/><br/>");
+	check_file($pdf,$proposal->company_overview,"Company Overview","","<br/><br/>");
+	check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements","<br/><br/>","");
+	check_file($pdf,$proposal->scope_of_works,"Scope of Works","<br/><br/>","");
+	check_file($pdf,$proposal->cost_estimate,"Cost Estimate","<br/><br/>","");
+	check_file($pdf,$proposal->conclusion,"Conclusion","<br/><br/>","");
 
 	// ---------------------------------------------------------
 
 	//Close and output PDF document
-	$pdf->Output($proposal->title.'.pdf', 'I');
-	//$pdf->Output($proposal->title.'.pdf', 'FD');
+	//$pdf->Output($proposal->title.'.pdf', 'I');
+	$pdf->Output($proposal->title.'.pdf', 'FD');
 
 	//============================================================+
 	// END OF FILE
 	//============================================================+
-	function check_file($pdf,$html,$title,$br){
-		$page_head = '<style>p{ line-height:18px; }</style>';
+	function check_file($pdf,$html,$title,$br,$br_two){
+		$page_head = '<style>p,ul{ line-height:22.5px; }</style>';
 		$page_head .= '<b style="color:#1a69e0">'.$title.'</b>';
 
 		if(strip_tags($html) != "" && strip_tags($html) != "&nbsp;" && preg_match('/[a-zA-z0-9]+/',strip_tags($html))){
-			$pdf->writeHTML($br.$page_head.$html, true, false, true, false, '');	
+			$pdf->writeHTML($br.$page_head.$br_two.$html, true, false, true, false, '');	
 		}
 	}
 ?>

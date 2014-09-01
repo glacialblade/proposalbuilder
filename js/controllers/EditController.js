@@ -16,10 +16,9 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 	
 	$scope.compare_values = function(key){
 		ctr++;
-		if(ctr > 10){
+		if(ctr > 5){
 			$scope.edited[key.toUpperCase()] = true;
 		}
-		console.log($scope.edited)
 	}
 
 	$scope.fetch_proposal = function(){
@@ -116,8 +115,11 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 				setup : function(ed) {
 			    	ed.on('GetContent', function(e) {
 			    		var key = e.target.id;
-					    $scope.proposal[key] = e.content;
-					    $scope.compare_values(key.replace(/_/g," "))
+
+					    if($scope.proposal[key] != e.content){
+					    	$scope.proposal[key] = e.content;
+					    	$scope.compare_values(key.replace(/_/g," "))	
+					    }
 					});
 			   	},
 				selector: tinymce_ids[i],

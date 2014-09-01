@@ -8,7 +8,7 @@
 		SELECT p.id,
                p.title,
                p.client_name,
-               p.submission_date,
+               DATE_FORMAT(p.submission_date,'%d, %b %Y') as submission_date,
                p.company_overview,
                p.confirmation_of_requirements,
                p.scope_of_works,

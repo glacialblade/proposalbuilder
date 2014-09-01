@@ -48,7 +48,38 @@ EOF;
 	}
 	else{
 		$company_overview = <<<EOF
-<br/><br/><table width="570"><tr><td><img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/company_overview_briston.jpg" /></td><td valign="top"><p>Briston Training and Development Pty Ltd (Briston) is a Registered Training Organisation (RTO) based in Brisbane, Qld. The company operates in three primary service areas, namely training design, training delivery, and provision of training support services. While Briston has the capacity to deliver nationally recognised qualifications from its own scope, the company also partners with several other RTOs including Evocca College, Outsource Services, and Shoreline Learning and Development to deliver a wide range of qualifications to clients across all industry groups.</p><p>Briston commenced delivery of training in January 2010 for its first client within the corrective services industry. Initial programs were custom designed for delivery to inmates within a maximum security remand center in Brisbane focusing on community based behaviors, and on provision of peer support roles within high risk units. The program was quickly expanded to incorporate delivery of “in Unit” Health and Fitness programs and LLN tutor training. Since this time, Briston has designed and delivered more than 15 different education programs for correctional centers using delivery methods and systems, which integrate seamlessly with security and operational requirements within each facility.</p><p>In April 11, Briston restructured to form a dedicated training design cell responsible for the conduct of specialized training analysis and design, developing customized courses for delivery in response to client’s needs.</p></td></tr></table>
+<table><tr><td><img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/company_overview_briston.jpg" /></td><td valign="top"><p>Briston Training and Development Pty Ltd (Briston) is a Registered Training Organisation (RTO) based in Brisbane, Qld. The company operates in three primary service areas, namely training design, training delivery, and provision of training support services. While Briston has the capacity to deliver nationally recognised qualifications from its own scope, the company also partners with several other RTOs including Evocca College, Outsource Services, and Shoreline Learning and Development to deliver a wide range of qualifications to clients across all industry groups.</p><p>Briston commenced delivery of training in January 2010 for its first client within the corrective services industry. Initial programs were custom designed for delivery to inmates within a maximum security remand center in Brisbane focusing on community based behaviors, and on provision of peer support roles within high risk units. The program was quickly expanded to incorporate delivery of “in Unit” Health and Fitness programs and LLN tutor training. Since this time, Briston has designed and delivered more than 15 different education programs for correctional centers using delivery methods and systems, which integrate seamlessly with security and operational requirements within each facility.</p><p>In April 11, Briston restructured to form a dedicated training design cell responsible for the conduct of specialized training analysis and design, developing customized courses for delivery in response to client’s needs.</p></td></tr></table>
+<br/>
+<table>
+	<tr>
+		<td valign="top">
+			<p>
+				The departments largest project was won in Jun 11, and involved the analysis, design and delivery of competency based training courses for Serco staff responsible for management and operation of the new South Queensland Correctional Centre at Gatton, Qld. During a nine-month project, more than fifteen designers worked to analyze and design training programs across systems such as security and surveillance, fire services, electrical services, kitchen operations and gardening and maintenance. In total, more than 75 training modules were designed, delivered and assessed as part of a highly successful project.
+			</p>
+			<p>
+				Briston’s design team has now worked with clients across a variety of industries including construction, education, health services, security, community services and automotive. Our past clients include:
+			</p>
+			<ul>
+				<li>Baulderstone;</li>
+				<li>Super Retail Group;</li>
+				<li>Queensland Rail;</li>
+				<li>Chubb;</li>
+				<li>The Salvation Army;</li>
+				<li>SmashCare Australia;</li>
+				<li>GEO Australia; and</li>
+				<li>Serco.</li>
+			</ul>
+		</td>
+		<td><img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/company_overview_briston_2.jpg" /></td>
+	</tr>
+</table>
+<b style="color:#1a69e0">Company Status</b>
+<p>
+	As a provider of choice, Briston is a small business and also holds third part certification as an RTO:
+</p>
+<ul>
+	<li><b>Third party quality certification</b>: Briston Training and Development is a Registered Training Organisation (RTO) listed on the national training register under provider number 32127.</li>
+</ul>
 EOF;
 	}
 
