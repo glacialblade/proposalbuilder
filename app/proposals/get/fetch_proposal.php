@@ -32,8 +32,7 @@
         FROM proposals p
         LEFT JOIN company_details c
         ON c.proposal_id = p.id
-        WHERE p.user_id = {$_SESSION['id']}
-          AND p.id = {$data['proposal_id']}
+        WHERE p.id = {$data['proposal_id']}
 	",false);
 
 	if(!$result){

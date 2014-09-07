@@ -122,6 +122,21 @@
 </table>
 EOF;
 
+/* HTML */
+function checkhtml($html,$title,$br){
+	$title = '<b style="color:#1a69e0">'.$title.'</b><br/><br/>';
+	if(strip_tags($html) != "" && strip_tags($html) != "&nbsp;" && preg_match('/[a-zA-z0-9]+/',strip_tags($html))){
+		return $br.$title.$html;
+	}
+	return "";
+}
+
+$html = $company_details.'<br style="page-break-before: always">';
+$html .= checkhtml($proposal->company_overview,"Company Overview");
+$html .= checkhtml($proposal->confirmation_of_requirements,"Company Overview","<br/>");
+$html .= checkhtml($proposal->scope_of_works,"Scope of Works","<br/>");
+$html .= checkhtml($proposal->cost_estimate,"Cost Estimate","<br/>");
+$html .= checkhtml($proposal->conclusion,"Conclusion","<br/>");
 
 /* ECHO HTML */
 	$document = <<<EOF
@@ -144,7 +159,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		@page{
 			mso-page-orientation: landscape;
 			size:21cm 29.7cm;
-			margin:1cm 1cm 1cm 1cm;
+			margin:1cm 2cm 1cm 2cm;
 		}
 		@page Section1 {
 			mso-footer-margin:.5in;
@@ -182,10 +197,10 @@ xmlns="http://www.w3.org/TR/REC-html40">
 	</xml>
 	<style>
 		html,body{
-			font-family:arial;
+			font-family:cambria;
 		}
 		#content2 ul li{
-			font-family:arial;
+			font-family:cambria;
 		}
 		#content2{
 			font-size:12px;
@@ -208,7 +223,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 <body>
 	<div class="Section1">
-		<div id="content" style="margin:-0.4in">
+		<div id="content" style="margin:-0.8in">
 			{$cover_page}
 			<br/>
 			<table style="width:100%;">
@@ -228,17 +243,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 
 	<div class="Section2">
 		<div id="content2">
-			{$company_details}
-			<br style="page-break-before: always">
-			{$proposal->company_overview}
-			<br style="page-break-before: always">
-			{$proposal->confirmation_of_requirements}
-			<br style="page-break-before: always">
-			{$proposal->scope_of_works}
-			<br style="page-break-before: always">
-			{$proposal->cost_estimate}
-			<br style="page-break-before: always">
-			{$proposal->conclusion}
+			{$html}
 		</div>
 	</div>
 	

@@ -4,7 +4,6 @@ angular.module("datepicker",[])
         restrict:"A",
         require:"ngModel",
         scope:{
-            format:"=",
             allowonly:"@"
         },
         controller:function($scope,$compile,$element,$timeout){
@@ -18,16 +17,10 @@ angular.module("datepicker",[])
                 $scope.show = false;
                 $scope.monthArray = new Array("January","February","March","April","May","June","July","August","September","October","November","December");
                 
-                $scope.currentval = $element.val().split("-");
-                if($scope.currentval != ""){
-                    $scope.y = parseInt($scope.currentval[0],10);
-                    $scope.m = parseInt($scope.currentval[1],10) - 1;
-                }
-                else{
-                    var now = new Date();
-                    $scope.m = now.getMonth();
-                    $scope.y = now.getFullYear();
-                }
+                $scope.currentval = "";
+                var now = new Date();
+                $scope.m = now.getMonth();
+                $scope.y = now.getFullYear();
 
                 if($scope.allowonly){
                     $scope.filterdate = JSON.parse(String($scope.allowonly));
@@ -377,6 +370,7 @@ angular.module("datepicker",[])
                 }
 
                 var date = "";
+                $scope.real_m = $scope.m;
                 $scope.m++;
                 if($scope.m < 10){
                     $scope.m = "0"+$scope.m;
@@ -424,6 +418,9 @@ angular.module("datepicker",[])
                             break;
                         case "yyyy/mm/dd":
                             date = $scope.y+"/"+$scope.m+"/"+$scope.d;
+                            break;
+                        case "dd, mon yyyy":
+                            date = $scope.d+", "+$scope.monthArray[$scope.real_m].substr(0,3)+" "+$scope.y;
                             break;
                         default:
                             date = $scope.y+"-"+$scope.m+"-"+$scope.d;

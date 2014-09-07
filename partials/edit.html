@@ -26,7 +26,7 @@
 						<colgroup width="230"/>
 						<tr>
 							<td>
-								<label for="client-name">Title</label><br/>
+								<label for="client-name">File Name</label><br/>
 								<input type="text" data-ng-model="proposal.title" size="23" maxlength="50"
 								       data-ng-change="compare_values('Cover Page')">
 							</td>
@@ -39,6 +39,7 @@
 								<input type="text" data-ng-model="proposal.submission_date" size="23" 
 								       datepicker="submission_date" 
 								       readonly=true 
+								       format="dd, mon yyyy"
 								       data-ng-change="compare_values('Cover Page')">
 							</td>
 						</tr>

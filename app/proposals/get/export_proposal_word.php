@@ -4,11 +4,13 @@
 	$database = new Database();
 	$data = $database->cleandata($_GET);
 
+	$host = "http://localhost/proposalbuilder";
+
 	$proposal = $database->get("
 		SELECT p.id,
                p.title,
                p.client_name,
-               DATE_FORMAT(p.submission_date,'%d, %b %Y') as submission_date,
+               p.submission_date,
                p.company_overview,
                p.confirmation_of_requirements,
                p.scope_of_works,
@@ -41,16 +43,16 @@
 	header("Content-Disposition: attachment;Filename={$proposal->title}.doc");
 
 	if($proposal->proposal_type_id == 1){
-		$header = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_header.jpg';
-		$footer = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_footer.jpg';
+		$header = $host.'/app/classes/tcpdf/images/briston_header.jpg';
+		$footer = $host.'/app/classes/tcpdf/images/briston_footer.jpg';
 		$tab_stops = 'center 3.0in right 0.0in';
-		$cover_page = '<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_bg.jpg" />';
+		$cover_page = '<img src="'.$host.'/app/classes/tcpdf/images/briston_bg.jpg" />';
 	}
 	else{
-		$header = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_header.jpg';
-		$footer = 'http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_footer.jpg';
+		$header = $host.'/app/classes/tcpdf/images/boss_header.jpg';
+		$footer = $host.'/app/classes/tcpdf/images/boss_footer.jpg';
 		$tab_stops = 'center 3.0in right 7.5in';
-		$cover_page = '<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_bg.jpg" />';
+		$cover_page = '<img src="'.$host.'/app/classes/tcpdf/images/boss_bg.jpg" />';
 	}
 
 	$rowspan="6";

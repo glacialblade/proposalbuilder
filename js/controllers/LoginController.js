@@ -4,6 +4,12 @@ function($scope,$window,$cookieStore,RedirectService,UsersFactory){
 		$scope.user = { email:"",password:"" }
 	});
 
+	angular.element(document.querySelectorAll(".login")).bind("keydown",function(e){
+		if(e.keyCode == 13){
+			$scope.login();
+		}
+	});
+
 	$scope.login = function(){
 		$scope.error = false;
 

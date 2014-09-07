@@ -23,7 +23,7 @@
 			<colgroup width="200"/>
 			<thead>
 				<tr>
-					<td>Title</td>
+					<td>File Name</td>
 					<td>Client Name</td>
 					<td>Submission Date</td>
 				</tr>
@@ -58,7 +58,7 @@
 			<input type="text" data-ng-model="proposal.client_name" class="long">
 			<br/><br/>
 			Submission Date <span class="error">*</span><br/>
-			<input type="text" data-ng-model="proposal.submission_date" class="long" datepicker="submission_date" readonly=true>
+			<input type="text" data-ng-model="proposal.submission_date" class="long" datepicker="submission_date" readonly=true format="dd, mon yyyy">
 			<br/><br/>
 			<input type="button" value="Create Proposal" data-ng-click="create_proposal()" data-ng-disabled="loader_create_proposal">
 			<img src="images/ajax-loader.gif" data-ng-if="loader_create_proposal" />

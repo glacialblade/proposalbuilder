@@ -5,11 +5,13 @@
 	$database = new Database();
 	$data = $database->cleandata($_GET);
 
+	$host = "http://localhost/proposalbuilder";
+	
 	$proposal = $database->get("
 		SELECT p.id,
                p.title,
                p.client_name,
-               DATE_FORMAT(p.submission_date,'%d, %b %Y') as submission_date,
+               p.submission_date,
                p.company_overview,
                p.confirmation_of_requirements,
                p.scope_of_works,
@@ -128,12 +130,12 @@
 	$pdf->AddPage();
 	if($proposal->proposal_type_id == 1){
 	$html = <<<EOF
-	<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_bg.jpg" />
+	<img src="{$host}/app/classes/tcpdf/images/briston_bg.jpg" />
 EOF;
 	}
 	else if($proposal->proposal_type_id == 2){
 	$html = <<<EOF
-	<img src="http://localhost/proposalbuilder/app/classes/tcpdf/images/boss_bg.jpg" />
+	<img src="{$host}/app/classes/tcpdf/images/boss_bg.jpg" />
 EOF;
 	}
 

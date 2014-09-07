@@ -15,8 +15,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 	});
 	
 	$scope.compare_values = function(key){
-		ctr++;
-		if(ctr > 5){
+		if($scope.proposal[key.replace(/ /g,"_")] != "<p>&nbsp;<br></p>"){
 			$scope.edited[key.toUpperCase()] = true;
 		}
 	}
@@ -49,6 +48,10 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 			$scope.message = false;
 			$scope.image_message = false;
 			$scope.page = page;
+
+			if($scope['page'] == 0 && $scope['page'] == 1){
+				$scope.compare_values($scope.pages[$scope.page]);
+			}
 		}
 	}
 
@@ -115,11 +118,11 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 				setup : function(ed) {
 			    	ed.on('GetContent', function(e) {
 			    		var key = e.target.id;
+			    		if(e.content != $scope.proposal[key] && e.content != '<p><br data-mce-bogus="1"></p>'){
+						    $scope.proposal[key] = e.content;
 
-					    if($scope.proposal[key] != e.content){
-					    	$scope.proposal[key] = e.content;
-					    	$scope.compare_values(key.replace(/_/g," "))	
-					    }
+						    $scope.compare_values(key.replace(/_/g," "))
+						}
 					});
 			   	},
 				selector: tinymce_ids[i],

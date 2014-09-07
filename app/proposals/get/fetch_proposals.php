@@ -5,12 +5,11 @@
 	$request = $_GET;
 	$data = $database->cleandata($request);
 	
-
 	if($data['filter'] == "New"){
-		$filter = "AND sysdate() < submission_date";
+		$filter = " AND sysdate() < DATE_ADD(date_created,INTERVAL 30 DAY)";
 	}
 	else if($data['filter'] == "Old"){
-		$filter = "AND sysdate() > submission_date";
+		$filter = " AND sysdate() > DATE_ADD(date_created,INTERVAL 30 DAY)";
 	}
 	
 	$query = "SELECT id,title,client_name,submission_date,status
@@ -18,7 +17,7 @@
 	          WHERE proposal_type_id = {$data['proposal_type_id']}
 	                {$filter}
 	          ORDER BY id DESC";
-
+	          
 	$result = $database->get($query,true);
 
 	if(!$result){

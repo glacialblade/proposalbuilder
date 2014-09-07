@@ -1,35 +1,24 @@
-(OK)For both the BOSS and Briston proposals – each heading is on a new page.  Is it possible to have the text start just under where the previous text finished?
+For both the BOSS and Briston proposals – the headers, footers and images on the cover page look a bit blurry.  Is there a way we can fix that? – They are still blurry.
+(Anil)
 
-(OK)For both the BOSS and Briston proposals – the headings should appear within the documents. E.g. Company Overview, Confirmation of Requirements, Scope of Works, etc.  They should be in blue text like the example proposals I sent you.  Maybe you can just have the headings pre-populated within the text fields.
+For both the BOSS and Briston proposals – how come the margins are different in the Word document compared to the PDF?  I like the margins (left and right indents) on the published PDF. – The Word document has issues.  The header and footer are not aligned, they are off the page.  Please see attached “Word proposal example - Updated test”.  This is for both Briston and BOSS.
+(Anil)
 
-(OK)For both the BOSS and Briston proposals – how come the margins are different in the Word document compared to the PDF?  I like the margins (left and right indents) on the published PDF.
+In the “Preview” section – can we have a “Save as” option where we can select a folder in Windows explorer to save the document in PDF or Word? – are you able to just put a “Save as” option on this page?  She attached image titled “Save as”.
+(Explain you sakanya na di kaya controllin to)
 
-(PDF nalang)Is it possible to make the default font: Cambria 12?
+Can we change the date format to DD MON YEAR?  Both on the Proposal cover page and under the “Submission Date” column? – this is still showing the incorrect format.
+(Ok na to reset ko nalang database para makita nila changes)
 
-In the “Preview” section – can we have a “Save as” option where we can select a folder in Windows explorer to save the document in PDF or Word?
+For the Briston proposal – when published in Word, the name of the client is on the next page instead of on the cover page. – this hasn’t been fixed.
+(Anil)
 
-Can we change the date format to DD MON YEAR?  Both on the Proposal cover page and under the “Submission Date” column?
+All users that log in need to be able to see all of the proposals created by themselves and the other users.  E.g. Andrew Bridge will need to be able to view/access a proposal that I have written.  Currently the proposals that I have written do not appear under Andrew’s or Da-en’s login. – this is not working.  The proposals are appearing in the list but they cannot be opened by a different user.
+(Ok na to)
 
-(OK)For both the BOSS and Briston proposals – there are times when we aren’t going to place text under the headings.  Currently when I don’t place any text a blank page appears when published.  Can we have it so that the website recognises when a heading doesn’t have text and it will be removed from the published proposal?
+In the “Add Proposal” popup.  Can you please change “Proposal Title” to “File Name”? – this hasn’t been done.
+(Ok na to)
+ 
+(Ok na to)For the BOSS proposal – please remove sections “SMT Waste Brokers – Service Options” and “Recommendations and Cost Estimate” from the Company Overview prepopulated text.
 
-(OK)Is it possible to have a notification if we have forget to press “save” on any of the sections.
-
-(OK)All users that log in need to be able to see all of the proposals created by themselves and the other users.  E.g. Andrew Bridge will need to be able to view/access a proposal that I have written.  Currently the proposals that I have written do not appear under Andrew’s or Da-en’s login.
-
-(OK NA)In the “Add Proposal” popup.  Can you please change “Proposal Title” to “File Name”?
-        
-(OK NA)For the Briston proposal – can you please remove the pre-populated text above “Conclusion – Moving forward”
-
-(OK NA)For the BOSS proposal – can you please change the pre-populated text for the Conclusion to:
-
-
-
-
-
-(ANIL)For both the BOSS and Briston proposals – the headers, footers and images on the cover page look a bit blurry Is there a way we can fix that?
-
-(ANIL)For the Briston proposal – when published in Word, the name of the client is on the next page instead of on the cover page.
-
-(ANIL)In the BOSS proposal, can you please include the “So why use us?” section under the “Company Overview”.  Please refer to the sample proposal I sent you.
-        
-(ANIL)For the Briston proposal – the second page of the Company Overview is missing from the pre-populated text.  Please refer to the sample proposal I sent you.  Also, include the “Company Status” section at the bottom J
+(Ok na to)On the login page, is it possible to be able to press the enter key on the keyboard after writing the password?  At present, I have to click on it with my mouse. 
