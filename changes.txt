@@ -1,24 +1,7 @@
+﻿Made cover pages for both Briston and Boss clearer. Edited a few other images and integrated the following changes :
+
 For both the BOSS and Briston proposals – the headers, footers and images on the cover page look a bit blurry.  Is there a way we can fix that? – They are still blurry.
-(Anil)
 
 For both the BOSS and Briston proposals – how come the margins are different in the Word document compared to the PDF?  I like the margins (left and right indents) on the published PDF. – The Word document has issues.  The header and footer are not aligned, they are off the page.  Please see attached “Word proposal example - Updated test”.  This is for both Briston and BOSS.
-(Anil)
-
-In the “Preview” section – can we have a “Save as” option where we can select a folder in Windows explorer to save the document in PDF or Word? – are you able to just put a “Save as” option on this page?  She attached image titled “Save as”.
-(Explain you sakanya na di kaya controllin to)
-
-Can we change the date format to DD MON YEAR?  Both on the Proposal cover page and under the “Submission Date” column? – this is still showing the incorrect format.
-(Ok na to reset ko nalang database para makita nila changes)
 
 For the Briston proposal – when published in Word, the name of the client is on the next page instead of on the cover page. – this hasn’t been fixed.
-(Anil)
-
-All users that log in need to be able to see all of the proposals created by themselves and the other users.  E.g. Andrew Bridge will need to be able to view/access a proposal that I have written.  Currently the proposals that I have written do not appear under Andrew’s or Da-en’s login. – this is not working.  The proposals are appearing in the list but they cannot be opened by a different user.
-(Ok na to)
-
-In the “Add Proposal” popup.  Can you please change “Proposal Title” to “File Name”? – this hasn’t been done.
-(Ok na to)
- 
-(Ok na to)For the BOSS proposal – please remove sections “SMT Waste Brokers – Service Options” and “Recommendations and Cost Estimate” from the Company Overview prepopulated text.
-
-(Ok na to)On the login page, is it possible to be able to press the enter key on the keyboard after writing the password?  At present, I have to click on it with my mouse. 

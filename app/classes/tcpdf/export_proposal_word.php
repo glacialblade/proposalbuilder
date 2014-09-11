@@ -4,7 +4,7 @@
 	$database = new Database();
 	$data = $database->cleandata($_GET);
 
-	$host = "http://localhost/proposalbuilder";
+	$host = "http://reportbuilder.bristonoutsourcing.com";
 
 	$proposal = $database->get("
 		SELECT p.id,
@@ -141,184 +141,7 @@ $html .= checkhtml($proposal->cost_estimate,"Cost Estimate","<br/>");
 $html .= checkhtml($proposal->conclusion,"Conclusion","<br/>");
 
 /* ECHO HTML */
-if($proposal->proposal_type_id == 1){
 	$document = <<<EOF
-<html xmlns:v="urn:schemas-microsoft-com:vml"
-xmlns:o="urn:schemas-microsoft-com:office:office"
-xmlns:w="urn:schemas-microsoft-com:office:word"
-xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
-xmlns="http://www.w3.org/TR/REC-html40">
-	<head>
-		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-		<title></title>
-		<style>
-			v\:* {behavior:url(#default#VML);}
-			o\:* {behavior:url(#default#VML);}
-			w\:* {behavior:url(#default#VML);}
-			.shape {behavior:url(#default#VML);}
-		</style>
-		
-		<style>
-		@page{
-			mso-page-orientation: landscape;
-			size:21cm 29.7cm;
-			margin:1cm 2cm 1cm 1cm;
-		}
-		@page Section1 {
-			mso-footer-margin:.5in;
-			mso-header: h1;
-			mso-footer: f1;
-		}
-		@page Section2 {
-			mso-header-margin:.5in;
-			mso-footer-margin:.5in;
-			mso-header: h2;
-			mso-footer: f2;
-		}
-		div.Section1 { page:Section1; }
-		div.Section2 { page:Section2; }
-		table#hrdftrtbl{
-			margin:0in 0in 0in 900in;
-			width:1px;
-			height:1px;
-			overflow:hidden;
-		}
-		p.MsoFooter, li.MsoFooter, div.MsoFooter{
-			margin:0in;
-			margin-bottom:.0001pt;
-			mso-pagination:widow-orphan;
-			tab-stops: {$tab_stops};
-			font-size:12.0pt;
-		}	
-	</style>
-	<xml>
-		<w:WordDocument>
-		<w:View>Print</w:View>
-		<w:Zoom>100</w:Zoom>
-		<w:DoNotOptimizeForBrowser/>
-		</w:WordDocument>
-	</xml>
-	<style>
-		html,body{
-			font-family:cambria;
-		}
-		#content2 ul li{
-			font-family:cambria;
-		}
-		#content2{
-			font-size:12px;
-			line-height:20px;
-		}
-		#content2 table{
-			font-size:12px;
-			line-height:20px;
-			border-collapse:collapse;
-		}
-		#companydetails tr td{
-			border:1px solid black;
-		}
-		#footer{
-			font-size:12px;
-			color:#555555;
-		}
-	</style>
-</head>
-
-<body>
-	<div class="Section1">
-		<div id="content" style="margin:-0.8in">
-			{$cover_page}
-			<br/>
-			<table style="width:100%;">
-				<tr>
-					<td style="color:#1a69e0;text-align:right;">
-						<em>
-						<span style="font-size:18px;font-weight:bold;">{$proposal->client_name}</span>
-						<br/>
-						<span style="font-size:14px">{$proposal->submission_date}</span>
-						</em>
-					</td>
-				</tr>
-			</table>
-			<br style="page-break-before:always; clear:both; mso-break-type:section-break">
-		</div>
-	</div>
-
-	<div class="Section2">
-		<div id="content2" style="margin:0.5in">
-			{$html}
-		</div>
-	</div>
-	
-	<!-- HEADER and FOOTER !-->
-	<table id='hrdftrtbl' border='0' cellspacing='0' cellpadding='0'>
-    	<tr>
-    		<td>        
-    			<div style='mso-element:header' id=h1>
-    				<table>
-						<tr>
-							<td style="width:10px;">
-							</td>
-						</tr>
-    				</table>
-        		</div>
-    			<div style='mso-element:header' id=h2>
-    				<table>
-						<tr>
-							<td style="width:10px;">
-								<img src="{$header}" />
-							</td>
-						</tr>
-    				</table>
-        		</div>
-    	    </td>
-    		<td id="footer">
-				<div style='mso-element:footer' id=f1>
-					<span style='position:relative;z-index:-1'> 
-						<img src="{$footer}" />
-						<!--
-						<p class=MsoFooter>
-							<span style=mso-tab-count:2'></span>
-							Page <span style='mso-field-code: PAGE '></span> of
-								 <span style='mso-field-code: NUMPAGES '></span>
-						</p>
-						!-->
-					</span>
-				</div>
-				<div style='mso-element:footer' id=f2>
-					<span style='position:relative;z-index:-1'> 
-						<img src="{$footer}" />
-						<!--
-						<p class=MsoFooter>
-							<span style=mso-tab-count:2'></span>
-							Page <span style='mso-field-code: PAGE '></span> of
-								 <span style='mso-field-code: NUMPAGES '></span>
-						</p>
-						!-->
-					</span>
-				</div>
-
-				<div style='mso-element:header' id=fh1>
-					<p class=MsoHeader><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
-				</div>
-				<div style='mso-element:footer' id=ff1>
-					<p class=MsoFooter><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
-				</div>
-				<div style='mso-element:header' id=fh2>
-					<p class=MsoHeader><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
-				</div>
-				<div style='mso-element:footer' id=ff2>
-					<p class=MsoFooter><span lang=EN-US style='mso-ansi-language:EN-US'>&nbsp;<o:p></o:p></span></p>
-				</div>
-			</td>
-		</tr>
-	</table>
-	</body>
-</html>
-EOF;
-echo $document;
-}else{
-$document = <<<EOF
 <html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -493,8 +316,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 </html>
 EOF;
 echo $document;
-}
-?>	
+?>
 
 <!--[if gte vml 1aaaaaaa]>
 <v:shapetype id="_x0000_t75"
