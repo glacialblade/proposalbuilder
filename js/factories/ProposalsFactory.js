@@ -3,7 +3,13 @@ proposalbuilder.factory("ProposalsFactory",function($http){
 
 	factory.fetch_proposals = function(data){
 		return $http({
-			url:"app/proposals/get/fetch_proposals.php?proposal_type_id="+data.proposal_type_id+"&filter="+data.filter,
+			url:"app/proposals/get/fetch_proposals.php?proposal_type_id="+data.proposal_type_id+"&filter="+data.filter.type+"&page="+data.filter.page,
+			method:"GET"
+		});
+	}
+	factory.fetch_proposals_count = function(data){
+		return $http({
+			url:"app/proposals/get/fetch_proposals_count.php?proposal_type_id="+data.proposal_type_id+"&filter="+data.filter.type+"&page="+data.filter.page,
 			method:"GET"
 		});
 	}

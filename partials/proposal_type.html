@@ -8,7 +8,7 @@
 			<input type="button" value="Add Proposal" data-ng-click="show_modal()">
 		</div>
 		<div class="textleft left" style="margin-bottom:5px;">
-			Filter: <select data-ng-model="filter" data-ng-change="fetch_proposals()"
+			Filter: <select data-ng-model="filter.type" data-ng-change="fetch_proposals()"
 			                data-ng-disabled="loader_fetch_proposal">
 						<option>New</option>
 						<option>Old</option>
@@ -16,6 +16,9 @@
 	     	<img src="images/ajax-loader.gif" data-ng-if="loader_fetch_proposal"/>
 		</div>
 		<div class="clear"></div>
+		<div class="textright" data-ng-if="total_pages & proposals.length > 10">
+			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()">/{{ total_pages }}
+		</div>
 		<table class="table">
 			<colgroup width="300"/>
 			<colgroup width="300"/>
@@ -42,6 +45,9 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="textright" data-ng-if="total_pages & proposals.length > 10">
+			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()">/{{ total_pages }}
+		</div>
 	</div>
 </div>
 

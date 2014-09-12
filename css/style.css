@@ -45,6 +45,9 @@ table.table tbody tr td{
 table.table tbody tr:nth-child(even){
 	background-color:#dcf4ff;
 }
+.smallinput{
+	padding:2px !important;
+}
 .textcenter{
 	text-align:center;
 }

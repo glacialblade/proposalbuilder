@@ -3,11 +3,37 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory){
 	$scope.$on("$routeChangeSuccess",function(){
 		$(".create_modal").modal({width:400});
 		$scope.proposal = { proposal_type_id:$routeParams.id };
-		$scope.filter = "New";
+		$scope.filter = {
+			type:"New",
+			page:1
+		}
 		$scope.fetch_proposals();
 	});
 
+	$scope.change_page = function(){
+		if($scope.filter.page > $scope.total_pages){
+			$scope.filter.page = $scope.total_pages;
+		}
+		else if(($scope.filter.page < 1 || isNaN($scope.filter.page)) && $scope.filter.page != ""){
+			$scope.filter.page = 1;
+		}
+
+		if($scope.filter.page){
+			$scope.fetch_proposals();
+		}
+	}
+	$scope.fetch_proposals_count = function(){
+		var promise = ProposalsFactory.fetch_proposals_count({proposal_type_id:$scope.proposal.proposal_type_id,filter:$scope.filter});
+		promise.then(function(data){
+			var total_proposals = data.data.total_proposals;
+			$scope.total_pages = Math.ceil(total_proposals / 10);
+		}).then(null,function(data){
+
+		})
+	}
+
 	$scope.fetch_proposals = function(){
+		$scope.fetch_proposals_count();
 		$scope.loader_fetch_proposal = true;
 		var promise = ProposalsFactory.fetch_proposals({proposal_type_id:$scope.proposal.proposal_type_id,filter:$scope.filter});
 		promise.then(function(data){
