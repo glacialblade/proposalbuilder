@@ -8,3 +8,6 @@ table{
 table tr td{
 	padding:8px;
 }
+ul li,ol li{
+	margin-bottom:12px;
+}

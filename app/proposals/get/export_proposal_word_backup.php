@@ -33,7 +33,8 @@
         FROM proposals p
         LEFT JOIN company_details c
         ON c.proposal_id = p.id
-        WHERE p.id = {$data['proposal_id']}
+        WHERE p.user_id = {$_SESSION['id']}
+          AND p.id = {$data['proposal_id']}
 	",false);
 
 	$pagebreak = '<br style="page-break-before: always">';
@@ -425,6 +426,7 @@ xmlns="http://www.w3.org/TR/REC-html40">
 		</div>
 	</div>
 	
+	<!-- HEADER and FOOTER !-->
 	<table id='hrdftrtbl' border='0' cellspacing='0' cellpadding='0'>
     	<tr>
     		<td>        
@@ -450,11 +452,25 @@ xmlns="http://www.w3.org/TR/REC-html40">
 				<div style='mso-element:footer' id=f1>
 					<span style='position:relative;z-index:-1'> 
 						<img src="{$footer}" />
+						<!--
+						<p class=MsoFooter>
+							<span style=mso-tab-count:2'></span>
+							Page <span style='mso-field-code: PAGE '></span> of
+								 <span style='mso-field-code: NUMPAGES '></span>
+						</p>
+						!-->
 					</span>
 				</div>
 				<div style='mso-element:footer' id=f2>
 					<span style='position:relative;z-index:-1'> 
 						<img src="{$footer}" />
+						<!--
+						<p class=MsoFooter>
+							<span style=mso-tab-count:2'></span>
+							Page <span style='mso-field-code: PAGE '></span> of
+								 <span style='mso-field-code: NUMPAGES '></span>
+						</p>
+						!-->
 					</span>
 				</div>
 
@@ -478,4 +494,33 @@ xmlns="http://www.w3.org/TR/REC-html40">
 EOF;
 echo $document;
 }
-?>
+?>	
+
+<!--[if gte vml 1aaaaaaa]>
+<v:shapetype id="_x0000_t75"
+    coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+    filled="f" stroked="f">
+    <v:stroke joinstyle="miter"/>
+    <v:formulas>
+        <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+        <v:f eqn="sum @0 1 0"/>
+        <v:f eqn="sum 0 0 @1"/>
+        <v:f eqn="prod @2 1 2"/>
+        <v:f eqn="prod @3 21600 pixelWidth"/>
+        <v:f eqn="prod @3 21600 pixelHeight"/>
+        <v:f eqn="sum @0 0 1"/>
+        <v:f eqn="prod @6 1 2"/>
+        <v:f eqn="prod @7 21600 pixelWidth"/>
+        <v:f eqn="sum @8 21600 0"/>
+        <v:f eqn="prod @7 21600 pixelHeight"/>
+        <v:f eqn="sum @10 21600 0"/>
+    </v:formulas>
+    <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+    <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype>
+<v:shape id="_x0000_s1025" type="#_x0000_t75" alt="" style='position:absolute;
+    margin-left:0;margin-top:2pt;width:537pt;height:57pt;z-index:251659264'>
+    <v:imagedata src="http://localhost/proposalbuilder/app/classes/tcpdf/images/briston_header.jpg"/>
+    <w:wrap type="square"/>
+</v:shape>
+<![endif]-->

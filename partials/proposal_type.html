@@ -16,8 +16,8 @@
 	     	<img src="images/ajax-loader.gif" data-ng-if="loader_fetch_proposal"/>
 		</div>
 		<div class="clear"></div>
-		<div class="textright" data-ng-if="total_pages & proposals.length > 10">
-			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()">/{{ total_pages }}
+		<div class="textright" data-ng-if="total_pages && total_pages > 1">
+			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()" data-ng-disabled="loader_fetch_proposal">/{{ total_pages }}
 		</div>
 		<table class="table">
 			<colgroup width="300"/>
@@ -45,8 +45,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="textright" data-ng-if="total_pages & proposals.length > 10">
-			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()">/{{ total_pages }}
+		<div class="textright" data-ng-if="total_pages && total_pages > 1">
+			Page: <input type="text" size="1" class="textcenter smallinput" data-ng-model="filter.page" data-ng-change="change_page()" data-ng-disabled="loader_fetch_proposal">/{{ total_pages }}
 		</div>
 	</div>
 </div>

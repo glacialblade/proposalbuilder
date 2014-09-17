@@ -34,8 +34,7 @@
         FROM proposals p
         LEFT JOIN company_details c
         ON c.proposal_id = p.id
-        WHERE p.user_id = {$_SESSION['id']}
-          AND p.id = {$data['proposal_id']}
+        WHERE p.id = {$data['proposal_id']}
 	",false);
 
 	if($proposal->proposal_type_id == 1){
@@ -247,27 +246,29 @@ EOF;
 	$pdf->writeHTML($html, true, false, true, false, '');
 	$pdf->addPage();
 
-	check_file($pdf,$proposal->company_overview,"Company Overview","","<br/><br/>");
-	check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements","<br/><br/>","");
-	check_file($pdf,$proposal->scope_of_works,"Scope of Works","<br/><br/>","");
-	check_file($pdf,$proposal->cost_estimate,"Cost Estimate","<br/><br/>","");
-	check_file($pdf,$proposal->conclusion,"Conclusion","<br/><br/>","");
-
+	$pdf->setCellHeightRatio(1.83);
+	$html = check_file($pdf,$proposal->company_overview,"Company Overview");
+	$html .= check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements");
+	$html .= check_file($pdf,$proposal->scope_of_works,"Scope of Works");
+	$html .= check_file($pdf,$proposal->cost_estimate,"Cost Estimate");
+	$html .= check_file($pdf,$proposal->conclusion,"Conclusion");
+	$pdf->writeHTML($html, true, false, true, false, '');
 	// ---------------------------------------------------------
 
 	//Close and output PDF document
 	//$pdf->Output($proposal->title.'.pdf', 'I');
-	$pdf->Output($proposal->title.'.pdf', 'FD');
+	$pdf->Output($proposal->title.'.pdf', 'D');
 
 	//============================================================+
 	// END OF FILE
 	//============================================================+
-	function check_file($pdf,$html,$title,$br,$br_two){
-		$page_head = '<style>p,ul{ line-height:22.5px; }</style>';
-		$page_head .= '<b style="color:#1a69e0">'.$title.'</b>';
+	function check_file($pdf,$html,$title){
+		$page_head = '<b style="color:#1a69e0">'.$title.'</b><br/>';
 
 		if(strip_tags($html) != "" && strip_tags($html) != "&nbsp;" && preg_match('/[a-zA-z0-9]+/',strip_tags($html))){
-			$pdf->writeHTML($br.$page_head.$br_two.$html, true, false, true, false, '');	
+			$html = str_replace("<p>", "", $html);
+			$html = str_replace("</p>", "", $html);
+			return $page_head.$html."<br/><br/>";
 		}
 	}
 ?>

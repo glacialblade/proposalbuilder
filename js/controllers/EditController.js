@@ -118,10 +118,12 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 				setup : function(ed) {
 			    	ed.on('GetContent', function(e) {
 			    		var key = e.target.id;
-			    		if(e.content != $scope.proposal[key] && e.content != '<p><br data-mce-bogus="1"></p>'){
-						    $scope.proposal[key] = e.content;
 
-						    $scope.compare_values(key.replace(/_/g," "))
+			    		if(e.content != $scope.proposal[key] && e.content != '<p><br data-mce-bogus="1"></p>'){
+						    if($scope.proposal[key] != null){
+						    	$scope.compare_values(key.replace(/_/g," "));
+						    }
+						    $scope.proposal[key] = e.content;
 						}
 					});
 			   	},
@@ -129,11 +131,13 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 				theme: "modern",
 				width: "100%",
 				height: 300,
+    			forced_root_block : false,  
 				plugins: [
 					"advlist link "+image+" lists hr pagebreak",
 					"searchreplace wordcount insertdatetime nonbreaking",
 					"table contextmenu directionality paste textcolor"
 				],
+				extended_valid_elements : "span[!class]",
 				relative_urls : false,
 				remove_script_host : false,
 				convert_urls : true,

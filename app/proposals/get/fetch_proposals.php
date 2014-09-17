@@ -5,7 +5,7 @@
 	$request = $_GET;
 	$data = $database->cleandata($request);
 	
-	$data['page']--;
+	$data['page'] = ($data['page']-1)*10;
 	if($data['filter'] == "New"){
 		$filter = " AND sysdate() < DATE_ADD(date_created,INTERVAL 30 DAY)";
 	}
