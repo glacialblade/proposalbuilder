@@ -251,14 +251,14 @@ EOF;
 	$html .= check_file($pdf,$proposal->confirmation_of_requirements,"Confirmation of Requirements");
 	$html .= check_file($pdf,$proposal->scope_of_works,"Scope of Works");
 	$html .= check_file($pdf,$proposal->cost_estimate,"Cost Estimate");
-	$html .= check_file($pdf,$proposal->conclusion,"Conclusion");
+	$html .= check_file($pdf,$proposal->conclusion,"Conclusion Moving Forward");
 	$pdf->writeHTML($html, true, false, true, false, '');
 	// ---------------------------------------------------------
-
+	
 	//Close and output PDF document
 	//$pdf->Output($proposal->title.'.pdf', 'I');
 	$pdf->Output($proposal->title.'.pdf', 'D');
-
+	
 	//============================================================+
 	// END OF FILE
 	//============================================================+

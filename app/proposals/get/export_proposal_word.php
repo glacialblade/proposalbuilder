@@ -137,7 +137,7 @@ $html .= checkhtml($proposal->company_overview,"Company Overview");
 $html .= checkhtml($proposal->confirmation_of_requirements,"Company Overview","<br/>");
 $html .= checkhtml($proposal->scope_of_works,"Scope of Works","<br/>");
 $html .= checkhtml($proposal->cost_estimate,"Cost Estimate","<br/>");
-$html .= checkhtml($proposal->conclusion,"Conclusion","<br/>");
+$html .= checkhtml($proposal->conclusion,"Conclusion Moving Forward","<br/>");
 
 /* ECHO HTML */
 if($proposal->proposal_type_id == 1){
