@@ -120,7 +120,8 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 			    	ed.on('GetContent', function(e) {
 			    		var key = e.target.id;
 
-			    		if(e.content != $scope.proposal[key] && e.content != '<p><br data-mce-bogus="1"></p>'){
+			    		if(e.content != $scope.proposal[key] && e.content != ''){
+						    console.log(e.content)
 						    if($scope.proposal[key] != null){
 						    	$scope.compare_values(key.replace(/_/g," "));
 						    }
