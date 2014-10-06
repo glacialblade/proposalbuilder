@@ -114,6 +114,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 			}
 
 			$(tinymce_ids[i]).val($scope.proposal[tinymce_ids[i].replace("#","")]);
+
 			tinymce.init({
 				setup : function(ed) {
 			    	ed.on('GetContent', function(e) {
@@ -126,6 +127,12 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 						    $scope.proposal[key] = e.content;
 						}
 					});
+					ed.addButton('page', {
+			            type: 'button',
+			            text: 'New Page',
+			            icon: false,
+			            onclick: function() { ed.insertContent('[np]'); }
+			        });
 			   	},
 				selector: tinymce_ids[i],
 				theme: "modern",
@@ -143,7 +150,7 @@ function($scope,$window,$routeParams,RedirectService,ProposalsFactory,ImagesFact
 				convert_urls : true,
 				image_list: $scope.forupload,
 				content_css: "css/editor-style.css",
-				toolbar: "insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor"
+				toolbar: "page | insertfile undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor"
 			});
 		}
 	}

@@ -244,7 +244,6 @@ EOF;
 </table>
 EOF;
 	$pdf->writeHTML($html, true, false, true, false, '');
-	$pdf->addPage();
 
 	$pdf->setCellHeightRatio(1.83);
 	$html = check_file($pdf,$proposal->company_overview,"Company Overview");
@@ -252,7 +251,19 @@ EOF;
 	$html .= check_file($pdf,$proposal->scope_of_works,"Scope of Works");
 	$html .= check_file($pdf,$proposal->cost_estimate,"Cost Estimate");
 	$html .= check_file($pdf,$proposal->conclusion,"Conclusion Moving Forward");
-	$pdf->writeHTML($html, true, false, true, false, '');
+
+	$forcedpages = explode("[np]",$html);
+
+	if(count($forcedpages) > 0){
+		foreach($forcedpages as $html){
+			$pdf->addPage();
+			$pdf->writeHTML($html, true, false, true, false, '');
+		}
+	}
+	else{
+		$pdf->addPage();
+		$pdf->writeHTML($html, true, false, true, false, '');
+	}
 	// ---------------------------------------------------------
 	
 	//Close and output PDF document

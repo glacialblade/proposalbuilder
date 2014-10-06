@@ -139,6 +139,8 @@ $html .= checkhtml($proposal->scope_of_works,"Scope of Works","<br/>");
 $html .= checkhtml($proposal->cost_estimate,"Cost Estimate","<br/>");
 $html .= checkhtml($proposal->conclusion,"Conclusion Moving Forward","<br/>");
 
+$html = str_replace("[np]", $pagebreak, $html);
+
 /* ECHO HTML */
 if($proposal->proposal_type_id == 1){
 	$document = <<<EOF
